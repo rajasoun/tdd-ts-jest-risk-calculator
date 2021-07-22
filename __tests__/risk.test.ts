@@ -12,7 +12,9 @@ describe("Threat Index Risk Rating based on Risk Score", () => {
     ${9}  | ${"High"}
     ${10} | ${"undefined"}
   `("$score", ({ score, rating }) => {
-    test.concurrent(`risk rating for score ${score} is ${rating}`, () => {
+    test.concurrent(`risk rating for 
+                                    score ${score} 
+                                    is ${rating}`, () => {
       expect(risk.rate(score)).toBe(rating);
     });
   });
@@ -71,11 +73,11 @@ describe("Threat Index ", () => {
       test.concurrent(
         `Threat Index for
                         string ${inputString}
-                        is ${wantLikelihoodScore}
-                        is ${wantLikelihoodLabel}
-                        is ${wantImpactScore}
-                        is ${wantImpactLabel}
-                        is ${wantCriticality}`,
+                        Likelihood Score is ${wantLikelihoodScore}
+                        Likelihood Label is ${wantLikelihoodLabel}
+                        Impact Score is ${wantImpactScore}
+                        Impcat Label is is ${wantImpactLabel}
+                        Overall Risk Score is ${wantCriticality}`,
         () => {
           const vector = risk.stringToVector(inputString);
           // Check likelihood Score
