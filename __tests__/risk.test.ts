@@ -1,4 +1,4 @@
-import risk from "./risk";
+import risk from "../src/risk";
 
 describe("Threat Index Risk Rating based on Risk Score", () => {
   describe.each`
@@ -108,16 +108,16 @@ describe("Threat Index Vector to String", () => {
   describe.each`
     threatVectorString 
     ${T1}      
-  `("$threatVectorString",({threatVectorString,}) => {
-      test.concurrent(
-        `Output String for
-                        ${threatVectorString}`,() => {
-          const vector = risk.stringToVector(threatVectorString);
-          const gotString = risk.vectorToString(vector)
-          expect(gotString).toBe(threatVectorString);
-        }
-      );
+  `("$threatVectorString", ({ threatVectorString, }) => {
+    test.concurrent(
+      `Output String for
+                        ${threatVectorString}`, () => {
+      const vector = risk.stringToVector(threatVectorString);
+      const gotString = risk.vectorToString(vector)
+      expect(gotString).toBe(threatVectorString);
     }
+    );
+  }
   );
 });
 
