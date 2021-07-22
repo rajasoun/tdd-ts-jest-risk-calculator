@@ -96,7 +96,7 @@ describe("Threat Index ", () => {
   );
 });
 
-describe("Threat Index Vector to String", () => {
+describe("Threat Index String to Vector to JSON to Vector to String", () => {
   const T1 =
     "(SL:1/M:1/O:0/S:2/ED:1/EE:1/A:1/ID:2/LC:2/LI:1/LAV:1/LAC:1/FD:1/RD:1/NC:2/PV:3)";
   const T2 =
@@ -105,20 +105,28 @@ describe("Threat Index Vector to String", () => {
     "(SL:9/M:9/O:4/S:2/ED:9/EE:3/A:6/ID:5/LC:6/LI:5/LAV:5/LAC:9/FD:3/RD:5/NC:5/PV:5)";
   const T4 =
     "(SL:9/M:9/O:9/S:2/ED:9/EE:9/A:9/ID:9/LC:9/LI:9/LAV:1/LAC:9/FD:9/RD:9/NC:9/PV:9)";
+  const T5 =
+    "(SL:9/M:9/O:9/S:)";
   describe.each`
-    threatVectorString 
-    ${T1}      
-  `("$threatVectorString", ({ threatVectorString, }) => {
+    threatVectorString | result
+    ${T1}              | ${true}
+    ${T2}              | ${true}
+    ${T3}              | ${true}
+    ${T4}              | ${true}
+    ${T5}              | ${false}
+  `("$threatVectorString", ({ threatVectorString, result }) => {
     test.concurrent(
-      `Output String for
-                        ${threatVectorString}`, () => {
+      `String -> Vector -> JSON -> Vector -> String 
+                                    for ${threatVectorString}
+                                    is ${result}`, () => {
       const vector = risk.stringToVector(threatVectorString);
-      const gotString = risk.vectorToString(vector)
-      expect(gotString).toBe(threatVectorString);
-    }
-    );
-  }
-  );
+      const json = risk.vectorToJson(vector)
+      const gotVector = risk.jsonToVector(json)
+      const gotString = risk.vectorToString(gotVector)
+      let expected = (gotString == threatVectorString)
+      expect(expected).toBe(result);
+    });
+  });
 });
 
 describe("Threat Index Risk Rating Colour based on Label", () => {

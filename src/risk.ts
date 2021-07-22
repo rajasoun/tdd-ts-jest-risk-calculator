@@ -52,6 +52,30 @@ class Risk {
   }
 
   /**
+  * Threat Index - Vector to JSON
+  * Vector is converted to JSON for easy storage 
+  * @param {Array<ThreatVector>} - Input Vector of Impact & Likelihood
+  *                                (16 parameters)
+  * @return {string } JSON String transfornmed from input vector
+  */
+  vectorToJson(vector: Array<ThreatVector>): string {
+    const json = JSON.stringify(vector);
+    return json;
+  }
+
+  /**
+ * Threat Index - JSON to Vector
+ * Vector is converted to JSON for easy storage 
+ * @param {string}                -  JSON Input String of Impact & Likelihood
+ *                                (16 parameters)
+ * @return {Array<ThreatVector> } Array of ThreatVector
+ */
+  jsonToVector(json: string): Array<ThreatVector> {
+    const vector = JSON.parse(json);
+    return vector;
+  }
+
+  /**
    * Threat Index - Calculate Score
    * Given a vector of 8 values - the functions resturn average value
    * @param {string} riskVector - Input vector of 8 parameters
