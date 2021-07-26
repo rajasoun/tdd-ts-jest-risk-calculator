@@ -3,18 +3,39 @@
     "lint-staged": "lint-staged",
     "lint-fix": "eslint ./src --ext .ts --cache --fix",
     "build": "tsc",
+    "dev": "next dev",
+    "start": "next start",
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-react-jsx": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/enzyme": "^3.10.9",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.0",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
+    "babel-jest": "^27.0.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^7.30.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^27.0.6",
+    "lint-staged": "^11.0.1",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.1.0",
-    "typescript": "^4.3.5",
-    "lint-staged": "^11.0.1"
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "next": "^11.0.1",
+    "react": "^16.0.2",
+    "react-dom": "^16.0.2"
   }
 }
