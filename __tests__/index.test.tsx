@@ -20,32 +20,13 @@ const props = {
   
 
 describe("With Enzyme", () => {
-  test('Test Threat Dropdown using shallow', () => {
+  test.concurrent('Test Threat Dropdown using shallow', () => {
     const wrapper = shallow(<SelectDropDown {...props} />);
-    console.log(wrapper.debug());
-    
     wrapper
 	.find('#dropdown_SL')
 	.at(0)
-	.simulate("change", {target : { value : 1, name: 'Security penetration skills' }})
-
-    // expect(wrapper.dropDownData('input')).toEqual(1);
-
-  });
-  // const props = {
-  //   updateFilter: jest.fn()  
-  // };
+	.simulate("change", {target : { value : 'Security penetration skills (1)', name: 'Security penetration skills' }})
   
-// test("Test Threat Dropdown using mount", () => {
-// 	  const wrapper = mount(<Home {...props} />);
-//     // console.log(wrapper.debug());
-    
-//     wrapper
-//     .find("#dropdown-id")
-//     .at(0)
-//     .props()
-//     .onChange({ target: { name: 'abc', value: 20 } });
-
-    
-//     expect(wrapper.dropDownData('input')).toEqual(20);
+  expect(wrapper.find('#dropdown_SL').props().value).toBe('Security penetration skills (1)');
+  }); 
 });

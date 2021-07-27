@@ -2,15 +2,22 @@ import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-
+import Risk from '../src/risk'
 
 const SelectDropDown = (props: any)=> {
   const [dropDownData, setDropDownData] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    console.log(event);
+    // console.log(event);
     
-    // setDropDownData(event.target.value as string)
+    setDropDownData(event.target.value as string)
+    // console.log(dropDownData);
+    
+    const risk = Risk.stringToVector('Security penetration skills (1)')
+    // console.log(risk);
+    const likelihood = Risk.calculateAverage(risk.slice(0, 8));
+    // console.log(likelihood);
+    
   };  
   
   return (
@@ -29,7 +36,7 @@ const SelectDropDown = (props: any)=> {
           props.options.map(
             (data:any, index: number) => (
               <MenuItem 
-                value={data.value} 
+                value={`${data.name} (${data.value})`} 
                 key={`options_${props.id}_${index}`}
               >
                 {data.name} ({data.value})
