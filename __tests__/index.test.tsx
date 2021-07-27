@@ -7,32 +7,32 @@ import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-const props = {
-  handleChange: jest.fn()
-};
 
 describe("With Enzyme", () => {
   // test('Test Threat Dropdown using shallow', () => {
   //   const wrapper = shallow(<SelectDropDown {...props} />);
   //   wrapper
-	// .find('#dropdown-id')
+	// .find('InputLabel')
 	// .at(0)
 	// .simulate("change", {target : { value : 1 }})
 
   //   expect(props.handleChange).toHaveBeenCalled();
 
   // });
-
+  // const props = {
+  //   updateFilter: jest.fn()
+  // };
+  
 // test("Test Threat Dropdown using mount", () => {
 // 	  const wrapper = mount(<Home {...props} />);
 //     // console.log(wrapper.debug());
     
-//    wrapper
-//     .find('Select')
+//     wrapper
+//     .find("#dropdown-id")
 //     .at(0)
 //     .props()
-//     .onChange({ target: { value: 1 } });
+//     .onChange({ target: { name: 'abc', value: 20 } });
+
     
-//     expect(props.handleChange).toHaveBeenCalled();
+//     expect(wrapper.dropDownData('input')).toEqual(20);
 // });
-});

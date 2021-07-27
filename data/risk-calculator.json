@@ -1,7 +1,7 @@
 {
-    "Thread Agent Factors" : [
+    "Threat Agent Factors" : [
         {
-        "name" : "skill level",
+        "name" : "Skill level",
         "id": "SL",
         "options":[ 
             {
@@ -26,7 +26,7 @@
             }
         ]
     },{
-        "name" : "motive",
+        "name" : "Motive",
         "id": "M",
         "options":[ 
             {
@@ -39,6 +39,52 @@
             },
             {
                 "name" : "High reward",
+                "value" : 9
+            }
+        ]
+    },{
+        "name" : "Opportunity",
+        "id": "O",
+        "options":[ 
+            {
+                "name" : "Full access or expensive resources required",
+                "value" : 0
+            },
+            {
+                "name" : "Special access or resources required",
+                "value" : 4
+            },
+            {
+                "name" : "Some access or resources required",
+                "value" : 7
+            },
+            {
+                "name" : "No access or resources required",
+                "value" : 9
+            }
+        ]
+    },{
+        "name" : "Size",
+        "id": "S",
+        "options":[ 
+            {
+                "name" : "Developers, System administrators",
+                "value" : 2
+            },
+            {
+                "name" : "Intranet users",
+                "value" : 4
+            },
+            {
+                "name" : "Partners",
+                "value" : 5
+            },
+            {
+                "name" : "Authenticated users",
+                "value" : 6
+            },
+            {
+                "name" : "Anonymous Internet users",
                 "value" : 9
             }
         ]

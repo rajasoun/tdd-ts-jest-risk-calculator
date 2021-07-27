@@ -8,7 +8,7 @@ import data from '../data/risk-calculator.json';
 export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
-            threadAgentFactors: data["Thread Agent Factors"],
+            threatAgentFactors: data,
         }
     }
 }
@@ -32,8 +32,7 @@ const StyleDiv = styled.div`
     margin-top: 20px;
     margin-left: 30px   
 `;
-const Home = ({threadAgentFactors}: any) => {
-    console.log(threadAgentFactors);
+const Home = ({threatAgentFactors}: any) => {
     
     return (
         <>
@@ -44,13 +43,12 @@ const Home = ({threadAgentFactors}: any) => {
                 Risk Assessment Calculator
             </Title>
             <HorizontalLine />
+            <StyleDiv>Threat Agent Factor</StyleDiv>
             {
-                threadAgentFactors.map((ele: any, index: number) => {
-                    console.log(ele);
+                threatAgentFactors["Threat Agent Factors"].map((ele: any, index: number) => {
                     return (
                         <div key={index}>
-                            <StyleDiv>Thread Agent Factor</StyleDiv>
-                            <SelectDropDown {...threadAgentFactors}/>
+                            <SelectDropDown name={ele.name} id={ele.id} options={ele.options}/>
                         </div>
                     )
                 })

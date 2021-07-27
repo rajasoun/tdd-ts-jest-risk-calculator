@@ -6,61 +6,55 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
       formControl: {
-        margin: theme.spacing(4),
-        minWidth: 300
+        margin: theme.spacing(3),
+        minWidth: 400,
       },
       selectEmpty: {
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(0),
-        marginBottom: theme.spacing(2),
         border: '1px solid black',
+        marginTop: "-10px"
       },
     }),
 );
 
 
 const SelectDropDown = (props: any)=> {
-  const objectData = Object.values(props);
+  const {name, id, options} = props;
   const classes = useStyles();
-  const [dropDownData, setDropDownData] = React.useState('');
-
+  const [dropDownData, setDropDownData] = React.useState({});
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setDropDownData(event.target.value as string);
+    setDropDownData(event.target.value as string)
   };  
   
   return (
     <>
-    <FormControl variant="outlined" className={classes.formControl}>
-      {
-        objectData.map((data: any, index: number) => {
-          return (
-          <>
-              <InputLabel id="demo-simple-select-outlined-label" key={index}>{data.name}</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="dropdown-id"
-                value={dropDownData}
-                onChange={handleChange}
-                label={data.name}
-                className={classes.selectEmpty}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {
-                  data["options"].map((newData:any, indexData: number) => {
-                    return <MenuItem value={newData.value} key={indexData}>{newData.name} ({newData.value})</MenuItem>
-                  })
-                }
-              </Select>
-          </>
-          )
-        })
-      }
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">{name}</InputLabel>
+        {
+          <Select
+              labelId="demo-simple-select-outlined-label"
+              id="dropdown-id"
+              value={dropDownData}
+              inputProps={{name: name, id: id}} 
+              onChange={(event) => {setDropDownData({input: event.target.value})}}
+              label={name}
+              className={classes.selectEmpty} 
+            >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {
+              options.map((data: any, index: number) => {
+                return <MenuItem value={data.value} key={index}>{data.name + " (" + data.value + ")"}</MenuItem>
+              })
+            }
+          </Select>
+        }
       </FormControl>
 
     </>
