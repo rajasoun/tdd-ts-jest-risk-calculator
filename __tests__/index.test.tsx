@@ -7,20 +7,33 @@ import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
+const props = {
+  "name": "skill level",
+  "id": "SL",
+  "options": [
+      {
+          "name" : "Security penetration skills",
+          "value" : 1
+      },
+    ]
+  };
+  
 
 describe("With Enzyme", () => {
-  // test('Test Threat Dropdown using shallow', () => {
-  //   const wrapper = shallow(<SelectDropDown {...props} />);
-  //   wrapper
-	// .find('InputLabel')
-	// .at(0)
-	// .simulate("change", {target : { value : 1 }})
+  test('Test Threat Dropdown using shallow', () => {
+    const wrapper = shallow(<SelectDropDown {...props} />);
+    console.log(wrapper.debug());
+    
+    wrapper
+	.find('#dropdown_SL')
+	.at(0)
+	.simulate("change", {target : { value : 1, name: 'Security penetration skills' }})
 
-  //   expect(props.handleChange).toHaveBeenCalled();
+    // expect(wrapper.dropDownData('input')).toEqual(1);
 
-  // });
+  });
   // const props = {
-  //   updateFilter: jest.fn()
+  //   updateFilter: jest.fn()  
   // };
   
 // test("Test Threat Dropdown using mount", () => {
@@ -35,4 +48,4 @@ describe("With Enzyme", () => {
 
     
 //     expect(wrapper.dropDownData('input')).toEqual(20);
-// });
+});

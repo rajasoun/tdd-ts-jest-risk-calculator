@@ -8,7 +8,9 @@ const SelectDropDown = (props: any)=> {
   const [dropDownData, setDropDownData] = React.useState('');
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setDropDownData(event.target.value as string)
+    console.log(event);
+    
+    // setDropDownData(event.target.value as string)
   };  
   
   return (
