@@ -8,29 +8,31 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 const props = {
-  updateFilter: jest.fn()
+  handleChange: jest.fn()
 };
 
 describe("With Enzyme", () => {
-  test.concurrent('Test Threat Dropdown using shallow', () => {
-    const wrapper = shallow(<SelectDropDown {...props} />);
-    wrapper
-	.find('#select-option')
-	.at(0)
-	.simulate("change", {target : { value : 1 }})
+  // test('Test Threat Dropdown using shallow', () => {
+  //   const wrapper = shallow(<SelectDropDown {...props} />);
+  //   wrapper
+	// .find('#dropdown-id')
+	// .at(0)
+	// .simulate("change", {target : { value : 1 }})
 
-    expect(props.updateFilter).toHaveBeenCalled();
+  //   expect(props.handleChange).toHaveBeenCalled();
 
-  });
+  // });
 
 // test("Test Threat Dropdown using mount", () => {
-//	  const wrapper = mount(<FiltersDesktop {...props} />);
-  //  wrapper
-  //   .find("#select-option")
-  //   .at(0)
-  //   .props()
-  //   .onChange({ target: { value: 1 } });
+// 	  const wrapper = mount(<Home {...props} />);
+//     // console.log(wrapper.debug());
     
-  //   expect(props.updateFilter).toHaveBeenCalled();
-//});
+//    wrapper
+//     .find('Select')
+//     .at(0)
+//     .props()
+//     .onChange({ target: { value: 1 } });
+    
+//     expect(props.handleChange).toHaveBeenCalled();
+// });
 });

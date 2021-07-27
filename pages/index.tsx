@@ -1,6 +1,17 @@
 import Head from 'next/head';
 import styled, { css } from 'styled-components';
-import SelectDropDown from '../component/select';
+import SelectDropDown from '../component/select';   
+import { GetStaticProps } from 'next';
+import data from '../data/risk-calculator.json';
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            threadAgentFactors: data["Thread Agent Factors"],
+        }
+    }
+}
 
 const Title = styled.div`
     font-size: 2.2rem;
@@ -21,7 +32,9 @@ const StyleDiv = styled.div`
     margin-top: 20px;
     margin-left: 30px   
 `;
-const Home = (props: any) => {
+const Home = ({threadAgentFactors}: any) => {
+    console.log(threadAgentFactors);
+    
     return (
         <>
             <Head>
@@ -31,8 +44,18 @@ const Home = (props: any) => {
                 Risk Assessment Calculator
             </Title>
             <HorizontalLine />
-            <StyleDiv>Thread Agent Factor</StyleDiv>
-            <SelectDropDown props={props}/>
+            {
+                threadAgentFactors.map((ele: any, index: number) => {
+                    console.log(ele);
+                    return (
+                        <div key={index}>
+                            <StyleDiv>Thread Agent Factor</StyleDiv>
+                            <SelectDropDown {...threadAgentFactors}/>
+                        </div>
+                    )
+                })
+           
+            }
         </>
     )
 }
