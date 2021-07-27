@@ -1,14 +1,28 @@
 import Head from 'next/head';
 import styled, { css } from 'styled-components';
+import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
 import SelectDropDown from '../component/select';   
 import { GetStaticProps } from 'next';
 import data from '../data/risk-calculator.json';
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        formControl: {
+            margin: '0.75rem 1rem',
+            minWidth: 400
+        },
+    }),
+);
 
 export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
-            threadAgentFactors: data["Thread Agent Factors"],
+            data: data,
         }
     }
 }
@@ -29,12 +43,13 @@ const HorizontalLine = styled.hr`
 const StyleDiv = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
-    margin-top: 20px;
-    margin-left: 30px   
+    margin: 1rem; 
 `;
-const Home = ({threadAgentFactors}: any) => {
-    console.log(threadAgentFactors);
-    
+
+const Home = ({data}: any) => {
+
+    const classes = useStyles();
+
     return (
         <>
             <Head>
@@ -44,18 +59,29 @@ const Home = ({threadAgentFactors}: any) => {
                 Risk Assessment Calculator
             </Title>
             <HorizontalLine />
+            <Grid container className={classes.root} >
             {
-                threadAgentFactors.map((ele: any, index: number) => {
-                    console.log(ele);
+                data.data.map((ele: any, index: number) => {
                     return (
-                        <div key={index}>
-                            <StyleDiv>Thread Agent Factor</StyleDiv>
-                            <SelectDropDown {...threadAgentFactors}/>
-                        </div>
+                        <Grid item xs={6} key={index}>
+                            <StyleDiv>{ele.title}</StyleDiv>
+                            {
+                                ele.select.map((data: any, i: number) => (
+                                    <Grid item xs={12} key={`custom_select${i}`}>
+                                        <FormControl 
+                                            variant="outlined" 
+                                            className={classes.formControl} 
+                                        >
+                                            <SelectDropDown {...data} />
+                                        </FormControl>
+                                    </Grid>
+                                ))
+                            }
+                        </Grid>
                     )
                 })
-           
             }
+            </Grid>
         </>
     )
 }

@@ -1,46 +1,53 @@
 {
-    "Thread Agent Factors" : [
+    "data": [
         {
-        "name" : "skill level",
-        "id": "SL",
-        "options":[ 
-            {
-                "name" : "Security penetration skills",
-                "value" : 1
-            },
-            {
-                "name" : "Network and programming skills",
-                "value" : 3
-            },
-            {
-                "name" : "Advanced computer user",
-                "value" : 5
-            },
-            {
-                "name" : "Some technical skills",
-                "value" : 6
-            },
-            {
-                "name" : "No technical skills",
-                "value" : 9
-            }
-        ]
-    },{
-        "name" : "motive",
-        "id": "M",
-        "options":[ 
-            {
-                "name" : "Low or no reward",
-                "value" : 1
-            },
-            {
-                "name" : "Possible reward",
-                "value" : 4
-            },
-            {
-                "name" : "High reward",
-                "value" : 9
-            }
-        ]
-    }]
+            "title": "Threat Agent Factors",
+            "select": [
+                {
+                    "name": "skill level",
+                    "id": "SL",
+                    "options": [
+                        {
+                            "name" : "Security penetration skills",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Network and programming skills",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Advanced computer user",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Some technical skills",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "No technical skills",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "motive",
+                    "id": "M",
+                    "options": [
+                        {
+                            "name" : "Low or no reward",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Possible reward",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "High reward",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }
