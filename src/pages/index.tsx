@@ -105,6 +105,7 @@ const LabelLayout = (props: any) => {
                     </div>
                 )
             }
+            {props.criticality}
         </StyledParentDiv>
     )
 }
@@ -117,16 +118,18 @@ const Home = ({data}: any) => {
         colour: "",
         impact: "",
         impactLabel: "",
-        vector: ""
+        vector: "",
+        criticality: ""
     });
-    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any, vector: any) => {
+    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any, vector: any, criticality: any) => {
         getChildPropsData({
             "avg": val,
             "score": ele,
             "colour": colour,
             "impact": impact,
             "impactLabel": impactLabel,
-            "vector": vector
+            "vector": vector,
+            "criticality": criticality
         })
     }
     return (
@@ -157,7 +160,7 @@ const Home = ({data}: any) => {
                                                     </FormControl>
                                                 </div>   
                                             )
-                                        ): <LabelLayout score={childPropsData.score} avg={childPropsData.avg} colour={childPropsData.colour} label={ele.label} impact={childPropsData.impact} impactLabel={childPropsData.impactLabel}/> 
+                                        ): <LabelLayout score={childPropsData.score} avg={childPropsData.avg} colour={childPropsData.colour} label={ele.label} impact={childPropsData.impact} impactLabel={childPropsData.impactLabel} criticality={childPropsData.criticality}/> 
                                     }
                                 </Grid>
                             )
