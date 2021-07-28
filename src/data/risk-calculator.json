@@ -206,7 +206,209 @@
         },
         {
             "label": "Threat Agent Factors",
-            "gridSize": 2
+            "gridSize": 2,
+            "factorsName": "Likelihood"
+        },
+        {
+            "title": "Technical Impact Factors",
+            "gridSize": 5,
+            "select": [
+                {
+                    "name": "Loss of confidentiality",
+                    "id": "TMF_LC",
+                    "options": [
+                        {
+                            "name" : "Minimal non-sensitive data disclosed",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "minimal critical data disclosed",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "extensive non-sensitive data disclosed",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "extensive critical data disclosed",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "all data disclosed",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Loss of integrity",
+                    "id": "TMF_LI",
+                    "options": [
+                        {
+                            "name" : "Minimal slightly corrupt data",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minimal seriously corrupt data",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Extensive slightly corrupt data",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive seriously corrupt data",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "All data totally corrupt",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Loss of availability",
+                    "id": "LMF_LAV",
+                    "options": [
+                        {
+                            "name" : "Minimal secondary services interrupted",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minimal primary services interrupted",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive secondary services interrupted",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive primary services interrupted",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "All services completely lost",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Loss of accountability",
+                    "id": "LMF_LAC",
+                    "options": [
+                        {
+                            "name" : "Fully traceable",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Possibly traceable",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Completely anonymous",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Business Impact Factors",
+            "gridSize": 5,
+            "select": [
+                {
+                    "name": "Financial damage",
+                    "id": "BIF_FD",
+                    "options": [
+                        {
+                            "name" : "Less than the cost to fix the vulnerability",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minor effect on annual profit",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Significant effect on annual profit",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Bankruptcy",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Reputation damage",
+                    "id": "BIF_RD",
+                    "options": [
+                        {
+                            "name" : "Minimal damage",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Loss of major accounts",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Loss of goodwill",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Brand damage",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Non-compliance",
+                    "id": "BIF_NC",
+                    "options": [
+                        {
+                            "name" : "Minor violation",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "Clear violation",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "High profile violation",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Total violation",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Privacy violation",
+                    "id": "BIF_PV",
+                    "options": [
+                        {
+                            "name" : "One individual",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Hundreds of people",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Thousands of people",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Millions of people",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Technical Impact Factors",
+            "gridSize": 2,
+            "factorsName": "Impact"
         }
     ]
 }

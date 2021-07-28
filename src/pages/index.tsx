@@ -47,7 +47,7 @@ const StyleDiv = styled.div`
 const LabelLayout = (props: any) => {
     return (
         <div>
-            <h2>Likelihood</h2>
+            <h2>{props.factorName} score</h2>
             <h3>{props.score}</h3>
         </div>
     )
@@ -82,7 +82,7 @@ const Home = ({data}: any) => {
                                 <SelectDropDown {...data} sendData={getData}/>
                         </FormControl>
                     </div>   ))    : 
-                    <LabelLayout score={childPropsData}/> }
+                    <LabelLayout score={childPropsData} factorName={ele.factorsName}/> }
                         </Grid>
                     )
                 })
