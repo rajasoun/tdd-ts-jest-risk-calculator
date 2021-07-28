@@ -18,9 +18,9 @@ class Risk {
    */
   vectorToString(vector: Array<ThreatVector>): string {
     // remove brackets
-    let result = '(' + vector[0].name + ":" + vector[0].value
+    let result = '(' + vector[0].id + ":" + vector[0].value
     for (let i = 1; i < vector.length; i++) {
-      result += '/' + vector[i].name + ':' + vector[i].value
+      result += '/' + vector[i].id + ':' + vector[i].value
     }
     result += ')';
     return result;

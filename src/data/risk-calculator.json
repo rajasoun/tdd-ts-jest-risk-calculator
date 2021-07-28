@@ -100,6 +100,107 @@
                     ]
                 }
             ]
+        },
+        {
+            "title": "Vulnerability Factors",
+            "select": [
+                {
+                    "name": "Ease of discovery",
+                    "id": "VF_ED",
+                    "options": [
+                        {
+                            "name" : "Practically impossible",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Difficult",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Easy",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Automated tools available",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Ease of exploit",
+                    "id": "VF_EE",
+                    "options": [
+                        {
+                            "name" : "Theoretical",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Difficult",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Easy",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Automated tools available",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Awareness",
+                    "id": "VF_A",
+                    "options": [
+                        {
+                            "name" : "Unknown",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Hidden",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Obvious",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "Public knowledge",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "name": "Intrusion detection",
+                    "id": "VF_ID",
+                    "options": [
+                        {
+                            "name" : "Developers",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "System administrators",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "Intranet users",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Partners",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Authenticated users",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "Anonymous Internet users",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

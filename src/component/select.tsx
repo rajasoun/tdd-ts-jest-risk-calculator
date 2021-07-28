@@ -24,17 +24,20 @@ const SelectDropDown = (props: any) => {
       
     //   vector.find((data: any) => data[removeSpace[0]] = parseInt(removeSpace[1]))
     // }
-    
 
     const handleChange = (event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
-        setDropDownData(event.target.value as string)
+        setDropDownData(event.target.value as number)
         if (typeof window != "undefined" && !localStorage.getItem("vector")){
             localStorage.setItem("vector", JSON.stringify(
                 [
                     {id: "TAF_SL", value: 1}, 
                     {id: "TAF_M", value: 1}, 
                     {id: "TAF_O", value: 0}, 
-                    {id: "TAF_S", value: 2}
+                    {id: "TAF_S", value: 2},
+                    {id: "VF_ED", value: 1},
+                    {id: "VF_EE", value: 1},
+                    {id: "VF_A", value: 1},
+                    {id: "VF_ID", value: 2}
                 ])
             )
         }
@@ -43,13 +46,23 @@ const SelectDropDown = (props: any) => {
             vector.find((obj: any) => obj.id === event.target.name).value = 
             (event.target.value).split(":")[1];
             localStorage.setItem("vector", JSON.stringify(vector))
+            const vectorToString = Risk.vectorToString(vector)
+            console.log(vectorToString);
+            const risk = Risk.stringToVector(vectorToString)
+            console.log(risk);
+            const likelihood = Risk.calculateAverage(risk.slice(0, 8));
+            console.log(likelihood);
+            const likelihoodLabel = Risk.rate(Number(likelihood));
+            console.log(likelihoodLabel);
+            const impact = Risk.calculateAverage(risk.slice(8, 16));
+            console.log(impact);
+            const impactLabel = Risk.rate(Number(impact));
+            console.log(impactLabel);
         }
-
         
-        // const risk = Risk.stringToVector(`(SL:1/M:1/O:0/S:2/ED:1/EE:1/A:1/ID:2/LC:2/LI:1/LAV:1/LAC:1/FD:1/RD:1/NC:2/PV:3)`)
-        // console.log(risk);
-        // const likelihood = Risk.calculateAverage(risk.slice(0, 8));
-        // console.log(likelihood);
+        
+        
+        
     };  
   
     return (
