@@ -87,13 +87,8 @@ const Styledlabel = styled.div`
 
 const LabelLayout = (props: any) => {
     return (
-<<<<<<< HEAD
-        <div>
-            <h2>{props.factorName} score</h2>
-=======
         <StyledParentDiv>
             <h1>Likelihood</h1>
->>>>>>> a304e6362136d2577494773db7ab5eb0699041f2
             <h3>{props.score}</h3>
             <Styledlabel variant='critical'>Low</Styledlabel>
         </StyledParentDiv>
@@ -115,29 +110,6 @@ const Home = ({data}: any) => {
                 Risk Assessment Calculator
             </Title>
             <HorizontalLine />
-<<<<<<< HEAD
-            <Grid container className={classes.root} >
-            {
-                data.data.map((ele: any, index: number) => {
-                    return (
-                        <Grid item xs={ele.gridSize} key={index}>
-                            <StyleDiv>{ele.title}</StyleDiv>
-                            { !ele.label ? ele.select.map((data: any, i: number) => (
-                            <div key={i}>
-                            <FormControl 
-                                variant="outlined" 
-                                className={classes.formControl} 
-                            >
-                                <SelectDropDown {...data} sendData={getData}/>
-                        </FormControl>
-                    </div>   ))    : 
-                    <LabelLayout score={childPropsData} factorName={ele.factorsName}/> }
-                        </Grid>
-                    )
-                })
-            }
-            </Grid>
-=======
             <Container maxWidth="lg">
                 <Grid container className={classes.root}>
                     {
@@ -165,7 +137,6 @@ const Home = ({data}: any) => {
                     }
                 </Grid>
             </Container>
->>>>>>> a304e6362136d2577494773db7ab5eb0699041f2
             <Modal />
         </>
     )
