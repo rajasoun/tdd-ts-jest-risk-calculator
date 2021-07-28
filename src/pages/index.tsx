@@ -1,11 +1,16 @@
 import Head from 'next/head';
-import styled, { css } from 'styled-components';
-import Grid, { GridSpacing } from '@material-ui/core/Grid';
+import { GetStaticProps } from 'next';
+
+import styled from 'styled-components';
+import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import SelectDropDown from '../component/select';   
-import { GetStaticProps } from 'next';
+
+import SelectDropDown from '../component/select';  
+import Modal from '../component/calculator-modal';
+
 import data from '../data/risk-calculator.json';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -46,6 +51,8 @@ const StyleDiv = styled.div`
     margin: 1rem; 
 `;
 
+
+
 const Home = ({data}: any) => {
 
     const classes = useStyles();
@@ -82,6 +89,7 @@ const Home = ({data}: any) => {
                 })
             }
             </Grid>
+            <Modal />
         </>
     )
 }
