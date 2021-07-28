@@ -48,14 +48,21 @@ const SelectDropDown = (props: any) => {
             localStorage.setItem("vector", JSON.stringify(vector))
             const vectorToString = Risk.vectorToString(vector)
             console.log(vectorToString);
+
             const risk = Risk.stringToVector(vectorToString)
             console.log(risk);
+
             const likelihood = Risk.calculateAverage(risk.slice(0, 8));
             console.log(likelihood);
+
+            props.sendData(likelihood)
+
             const likelihoodLabel = Risk.rate(Number(likelihood));
             console.log(likelihoodLabel);
+            
             const impact = Risk.calculateAverage(risk.slice(8, 16));
             console.log(impact);
+
             const impactLabel = Risk.rate(Number(impact));
             console.log(impactLabel);
         }

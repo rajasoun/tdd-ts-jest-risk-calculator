@@ -1,17 +1,13 @@
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
-
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-
 import SelectDropDown from '../component/select';  
 import Modal from '../component/calculator-modal';
-
 import data from '../data/risk-calculator.json';
-
-
+import { useState } from 'react';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -23,7 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-
 export const getStaticProps: GetStaticProps = async (context) => {
     return {
         props: {
@@ -31,7 +26,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
         }
     }
 }
-
 const Title = styled.div`
     font-size: 2.2rem;
     font-weight: 800;
@@ -39,12 +33,10 @@ const Title = styled.div`
     margin-top: 20px;
     margin-bottom: 20px;
 `;
-
 const HorizontalLine = styled.hr`
     width: 98%;
     border: 1px solid rgb(220, 220, 220);
 `; 
-
 const StyleDiv = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
@@ -52,11 +44,20 @@ const StyleDiv = styled.div`
 `;
 
 
-
+const LabelLayout = (props: any) => {
+    return (
+        <div>
+            <h2>Likelihood</h2>
+            <h3>{props.score}</h3>
+        </div>
+    )
+}
 const Home = ({data}: any) => {
-
     const classes = useStyles();
-
+    const [childPropsData, getChildPropsData] = useState('')
+    const getData = (val: any) => {
+        getChildPropsData(val)
+    }
     return (
         <>
             <Head>
@@ -70,20 +71,18 @@ const Home = ({data}: any) => {
             {
                 data.data.map((ele: any, index: number) => {
                     return (
-                        <Grid item xs={6} key={index}>
+                        <Grid item xs={ele.gridSize} key={index}>
                             <StyleDiv>{ele.title}</StyleDiv>
-                            {
-                                ele.select.map((data: any, i: number) => (
-                                    <Grid item xs={12} key={`custom_select${i}`}>
-                                        <FormControl 
-                                            variant="outlined" 
-                                            className={classes.formControl} 
-                                        >
-                                            <SelectDropDown {...data} />
-                                        </FormControl>
-                                    </Grid>
-                                ))
-                            }
+                            { !ele.label ? ele.select.map((data: any, i: number) => (
+                            <div key={i}>
+                            <FormControl 
+                                variant="outlined" 
+                                className={classes.formControl} 
+                            >
+                                <SelectDropDown {...data} sendData={getData}/>
+                        </FormControl>
+                    </div>   ))    : 
+                    <LabelLayout score={childPropsData}/> }
                         </Grid>
                     )
                 })
@@ -93,5 +92,4 @@ const Home = ({data}: any) => {
         </>
     )
 }
-
 export default Home;
