@@ -116,15 +116,17 @@ const Home = ({data}: any) => {
         avg: "",
         colour: "",
         impact: "",
-        impactLabel: ""
+        impactLabel: "",
+        vector: ""
     });
-    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any) => {
+    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any, vector: any) => {
         getChildPropsData({
             "avg": val,
             "score": ele,
             "colour": colour,
             "impact": impact,
-            "impactLabel": impactLabel
+            "impactLabel": impactLabel,
+            "vector": vector
         })
     }
     return (
@@ -163,7 +165,7 @@ const Home = ({data}: any) => {
                     }
                 </Grid>
             </Container>
-            <Modal />
+            <Modal vector={childPropsData.vector}/>
         </>
     )
 }

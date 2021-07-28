@@ -90,7 +90,7 @@ const StyledTd = styled.td`
 
 // const TdColoured = 
 
-const Modal = () => {
+const Modal = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const theme = useTheme();
@@ -102,7 +102,7 @@ const Modal = () => {
             <Grid item xs={12} >
                 <StyledFooterDiv>
                     <div>
-                        <strong>VECTOR:</strong> <StyledParagraphTag>()</StyledParagraphTag>
+                        <strong>VECTOR:</strong> <StyledParagraphTag>{props.vector}</StyledParagraphTag>
                     </div>
                     <StyledAnchorTag href="#" onClick={handleClickOpen}>
                         How is Severity Risk calculated?

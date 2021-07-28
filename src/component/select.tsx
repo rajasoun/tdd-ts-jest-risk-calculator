@@ -74,7 +74,7 @@ const SelectDropDown = (props: any) => {
             const impactLabel = Risk.rate(Number(impact));
             console.log(impactLabel);
 
-            props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel)
+            props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel, vectorToString)
         }
         
         
