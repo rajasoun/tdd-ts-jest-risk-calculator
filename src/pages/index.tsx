@@ -55,20 +55,20 @@ const StyledParentDiv = styled.div`
 `;
 
 const variantSeverity : any = {
-    medium: {
-        backgroundColor: "rgb(144, 238, 144)",
+    Medium: {
+        backgroundColor: "rgba(255, 169, 0)",
         color: "#000"
     },
-    low: {
+    Low: {
         backgroundColor: "rgb(255, 255, 0)",
         color: "#000"
     },
-    high: {
-        backgroundColor: "rgb(255, 169, 0)",
+    High: {
+        backgroundColor: "rgba(255, 0, 0)",
         color: "#000"
     },
-    critical: {
-        backgroundColor: "rgb(255, 0, 0)",
+    Critical: {
+        backgroundColor: "rgba(255, 102, 255)",
         color: "#fff"
     }
 };
@@ -88,18 +88,44 @@ const Styledlabel = styled.div`
 const LabelLayout = (props: any) => {
     return (
         <StyledParentDiv>
-            <h1>Likelihood</h1>
-            <h3>{props.score}</h3>
-            <Styledlabel variant='critical'>Low</Styledlabel>
+            <h1>{props.label}</h1>
+            {
+                props.avg && (
+                    <div>
+                    <h3>{props.avg}</h3>
+                    <Styledlabel variant={props.score}>{props.score}</Styledlabel>
+                    </div>
+                )
+            }
+            {
+                props.impact && (
+                    <div>
+                    <h3>{props.impact}</h3>
+                    <Styledlabel variant={props.impactLabel}>{props.impactLabel}</Styledlabel>
+                    </div>
+                )
+            }
         </StyledParentDiv>
     )
 }
 
 const Home = ({data}: any) => {
     const classes = useStyles();
-    const [childPropsData, getChildPropsData] = useState('')
-    const getData = (val: any) => {
-        getChildPropsData(val)
+    const [childPropsData, getChildPropsData] = useState({
+        score: "",
+        avg: "",
+        colour: "",
+        impact: "",
+        impactLabel: ""
+    });
+    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any) => {
+        getChildPropsData({
+            "avg": val,
+            "score": ele,
+            "colour": colour,
+            "impact": impact,
+            "impactLabel": impactLabel
+        })
     }
     return (
         <>
@@ -129,7 +155,7 @@ const Home = ({data}: any) => {
                                                     </FormControl>
                                                 </div>   
                                             )
-                                        ): <LabelLayout score={childPropsData}/> 
+                                        ): <LabelLayout score={childPropsData.score} avg={childPropsData.avg} colour={childPropsData.colour} label={ele.label} impact={childPropsData.impact} impactLabel={childPropsData.impactLabel}/> 
                                     }
                                 </Grid>
                             )

@@ -205,9 +205,8 @@
             ]
         },
         {
-            "label": "Threat Agent Factors",
-            "gridSize": 2,
-            "factorsName": "Likelihood"
+            "label": "Likelihood",
+            "gridSize": 2
         },
         {
             "title": "Technical Impact Factors",
@@ -267,7 +266,7 @@
                 },
                 {
                     "name": "Loss of availability",
-                    "id": "LMF_LAV",
+                    "id": "TMF_LAV",
                     "options": [
                         {
                             "name" : "Minimal secondary services interrupted",
@@ -293,7 +292,7 @@
                 },
                 {
                     "name": "Loss of accountability",
-                    "id": "LMF_LAC",
+                    "id": "TMF_LAC",
                     "options": [
                         {
                             "name" : "Fully traceable",
@@ -406,9 +405,8 @@
             ]
         },
         {
-            "label": "Technical Impact Factors",
-            "gridSize": 2,
-            "factorsName": "Impact"
+            "label": "Impact",
+            "gridSize": 2
         }
     ]
 }

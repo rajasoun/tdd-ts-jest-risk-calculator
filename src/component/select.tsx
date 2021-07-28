@@ -24,7 +24,6 @@ const SelectDropDown = (props: any) => {
       
     //   vector.find((data: any) => data[removeSpace[0]] = parseInt(removeSpace[1]))
     // }
-
     const handleChange = (event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
         setDropDownData(event.target.value as number)
         if (typeof window != "undefined" && !localStorage.getItem("vector")){
@@ -37,7 +36,15 @@ const SelectDropDown = (props: any) => {
                     {id: "VF_ED", value: 1},
                     {id: "VF_EE", value: 1},
                     {id: "VF_A", value: 1},
-                    {id: "VF_ID", value: 2}
+                    {id: "VF_ID", value: 2},
+                    {id: "TMF_LC", value: 2}, 
+                    {id: "TMF_LI", value: 1}, 
+                    {id: "TMF_LAV", value: 1}, 
+                    {id: "TMF_LAC", value: 1},
+                    {id: "BIF_FD", value: 1},
+                    {id: "BIF_RD", value: 1},
+                    {id: "BIF_NC", value: 2},
+                    {id: "BIF_PV", value: 3}
                 ])
             )
         }
@@ -55,16 +62,19 @@ const SelectDropDown = (props: any) => {
             const likelihood = Risk.calculateAverage(risk.slice(0, 8));
             console.log(likelihood);
 
-            props.sendData(likelihood)
-
             const likelihoodLabel = Risk.rate(Number(likelihood));
             console.log(likelihoodLabel);
+
+            const colour = Risk.colour(likelihoodLabel);
+            console.log(colour);
             
             const impact = Risk.calculateAverage(risk.slice(8, 16));
             console.log(impact);
 
             const impactLabel = Risk.rate(Number(impact));
             console.log(impactLabel);
+
+            props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel)
         }
         
         
