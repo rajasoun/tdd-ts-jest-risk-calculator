@@ -17,10 +17,43 @@ const props = {
       },
     ]
   };
-  
+
+const props1 = {
+  "name": "Motive",
+    "id": "M",
+    "options": [
+      {
+          "name" : "Low or no reward",
+          "value" : 1
+      },
+    ]
+  };
+
+const props2 = {
+  "name": "Opportunity",
+  "id": "O",
+  "options": [
+    {
+        "name" : "Full access or expensive resources required",
+        "value" : 0
+    },
+  ]
+};
+
+const props3 = {
+  "name": "Size",
+  "id": "S",
+  "options": [
+    {
+        "name" : "Developers, System administrators",
+        "value" : 2
+    },
+  ]
+};
 
 describe("With Enzyme", () => {
   test.concurrent('Test Threat Dropdown using shallow', () => {
+    // wrapper
     const wrapper = shallow(<SelectDropDown {...props} />);
     wrapper
 	.find('#dropdown_SL')
@@ -28,5 +61,32 @@ describe("With Enzyme", () => {
 	.simulate("change", {target : { value : 'Security penetration skills (1)', name: 'Security penetration skills' }})
   
   expect(wrapper.find('#dropdown_SL').props().value).toBe('Security penetration skills (1)');
-  }); 
+
+  // wrapper 1
+  const wrapper1 = shallow(<SelectDropDown {...props1} />);
+    wrapper1
+	.find('#dropdown_M')
+	.at(0)
+	.simulate("change", {target : { value : 'Low or no reward (1)', name: 'Low or no reward' }})
+  
+  expect(wrapper1.find('#dropdown_M').props().value).toBe('Low or no reward (1)');
+
+  // wrapper 2
+  const wrapper2 = shallow(<SelectDropDown {...props2} />);
+    wrapper2
+	.find('#dropdown_O')
+	.at(0)
+	.simulate("change", {target : { value : 'Full access or expensive resources required (0)', name: 'Full access or expensive resources required' }})
+  
+  expect(wrapper2.find('#dropdown_O').props().value).toBe('Full access or expensive resources required (0)');
+
+  // wrapper 3
+  const wrapper3 = shallow(<SelectDropDown {...props3} />);
+    wrapper3
+	.find('#dropdown_S')
+	.at(0)
+	.simulate("change", {target : { value : 'Developers, System administrators (2)', name: 'Developers, System administrators' }})
+  
+  expect(wrapper3.find('#dropdown_S').props().value).toBe('Developers, System administrators (2)');
+});
 });
