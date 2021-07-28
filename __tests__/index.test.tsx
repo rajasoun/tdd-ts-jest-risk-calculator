@@ -1,19 +1,18 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
-import SelectDropDown from '../component/select';
-import Home from '../pages/index';
-import data from '../data/risk-calculator.json'
+import SelectDropDown from '../src/component/select';
+import Home from '../src/pages/index';
 
 import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-const dropDownData: any = [];
-data.data.map((ele: any) => {
-  ele.select.map((selectele: any) => {
-      dropDownData.push(selectele)
-  })
-})
+// const dropDownData: any = [];
+// data.data.map((ele: any) => {
+//   ele.select.map((selectele: any) => {
+//       dropDownData.push(selectele)
+//   })
+// })
 
 // console.log(...dropDownData);
 
