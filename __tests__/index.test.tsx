@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
-import SelectDropDown from '../component/select';
-import Home from '../pages/index';
+import SelectDropDown from '../src/component/select';
+import Home from '../src/pages/index';
 
 import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
