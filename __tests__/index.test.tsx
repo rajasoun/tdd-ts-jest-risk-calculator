@@ -8,6 +8,15 @@ import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
+// const dropDownData: any = [];
+// data.data.map((ele: any) => {
+//   ele.select.map((selectele: any) => {
+//       dropDownData.push(selectele)
+//   })
+// })
+
+// console.log(...dropDownData);
+
 const props = {
   "name": "skill level",
   "id": "TAF_SL",

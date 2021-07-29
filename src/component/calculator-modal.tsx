@@ -9,13 +9,22 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { BorderBottom } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
             margin: '2rem 0'
-        }
+        },
+        closeButton: {
+            position: 'absolute',
+            right: theme.spacing(1),
+            top: theme.spacing(1),
+            color: theme.palette.grey[500],
+        },
     }),
 );
 
@@ -47,7 +56,7 @@ const StyledTHead = styled.thead`
 `;
 
 const StyledTh = styled.th`
-    padding: 0.5rem;
+    padding: 1rem;
     border-bottom: 1px solid rgb(220,220,220);
 `;
 
@@ -80,13 +89,14 @@ const variantOptions : any = {
 };
 
 const StyledTd = styled.td`
-    padding: 0.5rem;
+    padding: 1rem;
     border-bottom: 1px solid rgb(220,220,220);
     ${({ variant }) => variant && variantOptions[variant] && css`
        background-color: ${variantOptions[variant].backgroundColor};
        color: ${variantOptions[variant].color};
        font-weight: ${variantOptions[variant].fontWeight};
    `}
+   border-right: 0.5px solid rgb(220,220,220);
 `;
 
 // const TdColoured = 
@@ -119,6 +129,13 @@ const Modal = (props: any) => {
                 <DialogTitle id="responsive-dialog-title">
                     How is Severity Risk calculated?
                 </DialogTitle>
+                <IconButton 
+                    aria-label="close" 
+                    className={classes.closeButton} 
+                    onClick={handleClose}
+                >
+                <CloseIcon />
+                </IconButton>
                 <DialogContent>
                     <StyledTable>
                         <StyledTHead>
@@ -138,7 +155,7 @@ const Modal = (props: any) => {
                                 <StyledTd variant="orange">Medium</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd>6 to 9</StyledTd>
+                                <StyledTd style={{borderBottom: 'none'}}>{`6 to 9`}</StyledTd>
                                 <StyledTd variant="red">High</StyledTd>
                             </tr>
                         </tbody>
@@ -179,8 +196,8 @@ const Modal = (props: any) => {
                                 <StyledTd>HIGH</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd></StyledTd>
-                                <StyledTd colSpan={4}>Likelihood</StyledTd>
+                                <StyledTd style={{borderBottom: 'none'}}></StyledTd>
+                                <StyledTd colSpan={4} style={{borderBottom: 'none',borderRight: 'none'}}>Likelihood</StyledTd>
                             </tr>
                         </tbody>
                     </StyledTable>
