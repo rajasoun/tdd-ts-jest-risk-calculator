@@ -13,38 +13,29 @@ const SelectDropDown = (props: any) => {
 
     const [dropDownData, setDropDownData] = useState('');
 
-    // if(dropDownData != '')
-    // {
-    // //   console.log(dropDownData);    
-    //   let replaceBrackets: any = dropDownData.replace(":", " ");
-    // //   console.log(replaceBrackets);
-      
-    //   let removeSpace: any = replaceBrackets.split(" ");
-    // //   console.log(removeSpace[0]);
-      
-    //   vector.find((data: any) => data[removeSpace[0]] = parseInt(removeSpace[1]))
-    // }
-    const handleChange = (event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
-        setDropDownData(event.target.value as string)
+    const handleChange = (
+        event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>
+    ) => {
+        setDropDownData(event.target.value as number)
         if (typeof window != "undefined" && !localStorage.getItem("vector")){
             localStorage.setItem("vector", JSON.stringify(
                 [
-                    {id: "TAF_SL", value: 1}, 
-                    {id: "TAF_M", value: 1}, 
-                    {id: "TAF_O", value: 0}, 
-                    {id: "TAF_S", value: 2},
-                    {id: "VF_ED", value: 1},
-                    {id: "VF_EE", value: 1},
-                    {id: "VF_A", value: 1},
-                    {id: "VF_ID", value: 2},
-                    {id: "TMF_LC", value: 2}, 
-                    {id: "TMF_LI", value: 1}, 
-                    {id: "TMF_LAV", value: 1}, 
-                    {id: "TMF_LAC", value: 1},
-                    {id: "BIF_FD", value: 1},
-                    {id: "BIF_RD", value: 1},
-                    {id: "BIF_NC", value: 2},
-                    {id: "BIF_PV", value: 3}
+                    {id: "TAF_SL", name: "SL", value: 1}, 
+                    {id: "TAF_M", name: "M", value: 1}, 
+                    {id: "TAF_O", name: "O",value: 0}, 
+                    {id: "TAF_S", name: "S", value: 2},
+                    {id: "VF_ED", name: "ED", value: 1},
+                    {id: "VF_EE", name: "EE", value: 1},
+                    {id: "VF_A", name: "A", value: 1},
+                    {id: "VF_ID", name: "ID", value: 2},
+                    {id: "TMF_LC", name: "LC", value: 2}, 
+                    {id: "TMF_LI", name: "LI", value: 1}, 
+                    {id: "TMF_LAV", name: "LAV", value: 1}, 
+                    {id: "TMF_LAC", name: "LAC", value: 1},
+                    {id: "BIF_FD", name: "FD", value: 1},
+                    {id: "BIF_RD", name: "RD", value: 1},
+                    {id: "BIF_NC", name: "NC", value: 2},
+                    {id: "BIF_PV", name: "PV", value: 3}
                 ])
             )
         }
@@ -53,37 +44,33 @@ const SelectDropDown = (props: any) => {
             // vector.find((obj: any) => obj.id === event.target.name).value = 
             // (event.target.value).split(":")[1];
             localStorage.setItem("vector", JSON.stringify(vector))
+
             const vectorToString = Risk.vectorToString(vector)
-            // console.log(vectorToString);
-
             const risk = Risk.stringToVector(vectorToString)
-            // console.log(risk);
 
-            const likelihood = Risk.calculateAverage(risk.slice(0, 8));
-            // console.log(likelihood);
-
-            const likelihoodLabel = Risk.rate(Number(likelihood));
-            // console.log(likelihoodLabel);
-
-            const colour = Risk.colour(likelihoodLabel);
-            // console.log(colour);
+            const likelihoodAvg = Risk.calculateAverage(risk.slice(0, 8));
+            const likelihoodLabel = Risk.rate(Number(likelihoodAvg));
+            const likelihoodLabelColour = Risk.colour(likelihoodLabel);
             
-            const impact = Risk.calculateAverage(risk.slice(8, 16));
-            // console.log(impact);
-
-            const impactLabel = Risk.rate(Number(impact));
-            // console.log(impactLabel);
-
+            const impactAvg = Risk.calculateAverage(risk.slice(8, 16));
+            const impactLabel = Risk.rate(Number(impactAvg));
+            const impactLabelColour = Risk.colour(impactLabel);
+            
             const criticality = Risk.criticality(likelihoodLabel, impactLabel);
-            // console.log(criticality);
-            
+            const criticalityColour = Risk.colour(criticality)
 
-            // props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel, vectorToString, criticality)
-        }
-        
-        
-        
-        
+            props.sendData({
+                "likelihoodAvg": likelihoodAvg,
+                "likelihoodLabel": likelihoodLabel,
+                "likelihoodLabelColour": likelihoodLabelColour,
+                "impactAvg": impactAvg,
+                "impactLabel": impactLabel,
+                "impactLabelColour": impactLabelColour,
+                "criticality": criticality,
+                "criticalityColour": criticalityColour,
+                "vector": vectorToString
+            })
+        }   
     };  
   
     return (

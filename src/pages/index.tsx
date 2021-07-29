@@ -10,6 +10,18 @@ import Modal from '../component/calculator-modal';
 import data from '../data/risk-calculator.json';
 import { useState } from 'react';
 
+interface RiskCalculation {
+    likelihoodAvg: string,
+    likelihoodLabel: string,
+    likelihoodLabelColour: string,
+    impactAvg: string,
+    impactLabel: string,
+    impactLabelColour: string,
+    criticality: string,
+    criticalityColour: string,
+    vector: string
+}
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -50,28 +62,15 @@ const StyleDiv = styled.div`
 `;
 
 const StyledParentDiv = styled.div`
-    margin-top: 8rem;
+    margin-top: 4rem;
     text-align: center;
 `;
 
-const variantSeverity : any = {
-    Medium: {
-        backgroundColor: "rgba(255, 169, 0)",
-        color: "#000"
-    },
-    Low: {
-        backgroundColor: "rgb(255, 255, 0)",
-        color: "#000"
-    },
-    High: {
-        backgroundColor: "rgba(255, 0, 0)",
-        color: "#000"
-    },
-    Critical: {
-        backgroundColor: "rgba(255, 102, 255)",
-        color: "#fff"
-    }
-};
+const StyledCriticallityDiv = styled.div`
+    margin-top: -6rem;
+    float: right;
+    text-align: center;
+`;
 
 const Styledlabel = styled.div`
     margin: 0 3rem;
@@ -79,59 +78,34 @@ const Styledlabel = styled.div`
     background-color: red;
     font-size: 1.15em;
     font-weight: 700;
-    ${({ variant }) => variant && variantSeverity[variant] && css`
-       background-color: ${variantSeverity[variant].backgroundColor};
-       color: ${variantSeverity[variant].color};
+    ${({ variant }) => variant && css`
+       background-color: ${variant};
    `}
 `;
 
 const LabelLayout = (props: any) => {
+
+    const data = props
+
     return (
         <StyledParentDiv>
-            <h1>{props.label}</h1>
+            <h1>{data.title}</h1>
             {
-                props.avg && (
+                data.avg && (
                     <div>
-                    <h3>{props.avg}</h3>
-                    <Styledlabel variant={props.score}>{props.score}</Styledlabel>
+                        <h3>{data.avg}</h3>
+                        <Styledlabel variant={data.color}>{data.label}</Styledlabel>
                     </div>
                 )
             }
-            {
-                props.impact && (
-                    <div>
-                    <h3>{props.impact}</h3>
-                    <Styledlabel variant={props.impactLabel}>{props.impactLabel}</Styledlabel>
-                    </div>
-                )
-            }
-            {props.criticality}
         </StyledParentDiv>
     )
 }
 
 const Home = ({data}: any) => {
     const classes = useStyles();
-    const [childPropsData, getChildPropsData] = useState({
-        score: "",
-        avg: "",
-        colour: "",
-        impact: "",
-        impactLabel: "",
-        vector: "",
-        criticality: ""
-    });
-    const getData = (val: any, ele: any, colour: any, impact: any, impactLabel: any, vector: any, criticality: any) => {
-        getChildPropsData({
-            "avg": val,
-            "score": ele,
-            "colour": colour,
-            "impact": impact,
-            "impactLabel": impactLabel,
-            "vector": vector,
-            "criticality": criticality
-        })
-    }
+    const [state, setState] = useState<RiskCalculation>();
+    const getData = (childData: RiskCalculation) => setState({...childData})
     return (
         <>
             <Head>
@@ -160,7 +134,20 @@ const Home = ({data}: any) => {
                                                     </FormControl>
                                                 </div>   
                                             )
-                                        ): <LabelLayout score={childPropsData.score} avg={childPropsData.avg} colour={childPropsData.colour} label={ele.label} impact={childPropsData.impact} impactLabel={childPropsData.impactLabel} criticality={childPropsData.criticality}/> 
+                                        ): 
+                                        ele.label == 'Likelihood' ?  
+                                        <LabelLayout 
+                                            title={ele.label}
+                                            avg={state?.likelihoodAvg}
+                                            label={state?.likelihoodLabel}
+                                            color={state?.likelihoodLabelColour}
+                                        /> :
+                                        <LabelLayout 
+                                            title={ele.label}
+                                            avg={state?.impactAvg}
+                                            label={state?.impactLabel}
+                                            color={state?.impactLabelColour}
+                                        />
                                     }
                                 </Grid>
                             )
@@ -168,7 +155,22 @@ const Home = ({data}: any) => {
                     }
                 </Grid>
             </Container>
-            <Modal vector={childPropsData.vector}/>
+            <Container>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <StyledCriticallityDiv>
+                            <h1>Risk Severity</h1>
+                            {
+                                state?.criticalityColour && 
+                                <Styledlabel variant={state?.criticalityColour}>
+                                    {state?.criticality}
+                                </Styledlabel>
+                            }
+                        </StyledCriticallityDiv>
+                    </Grid>
+                </Grid>
+            </Container>
+            <Modal vector={state?.vector}/>
         </>
     )
 }

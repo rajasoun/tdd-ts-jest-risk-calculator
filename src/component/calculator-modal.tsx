@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
+            margin: '2rem 0'
         }
     }),
 );
@@ -90,7 +91,7 @@ const StyledTd = styled.td`
 
 // const TdColoured = 
 
-const Modal = (props) => {
+const Modal = (props: any) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const theme = useTheme();
@@ -99,7 +100,7 @@ const Modal = (props) => {
     const handleClose = () => { setOpen(false); };
     return (
         <Grid container className={classes.root} >
-            <Grid item xs={12} >
+            <Grid item xs={12}>
                 <StyledFooterDiv>
                     <div>
                         <strong>VECTOR:</strong> <StyledParagraphTag>{props.vector}</StyledParagraphTag>
