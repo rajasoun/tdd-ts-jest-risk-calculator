@@ -2,7 +2,7 @@
   "scripts": {
     "lint-staged": "lint-staged",
     "lint-fix": "eslint ./src --ext .ts --cache --fix",
-    "build": "tsc",
+    "build": "next build && next export",
     "dev": "next dev",
     "start": "next start",
     "test": "jest",
@@ -28,6 +28,7 @@
     "enzyme-to-json": "^3.6.2",
     "eslint": "^7.30.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-next": "^11.0.1",
     "jest": "^27.0.6",
     "lint-staged": "^11.0.1",
     "ts-jest": "^27.0.4",
@@ -36,6 +37,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
     "mock-local-storage": "^1.1.17",
     "next": "^11.0.1",
     "react": "^16.0.2",
