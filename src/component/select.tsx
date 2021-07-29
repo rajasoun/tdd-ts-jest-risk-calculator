@@ -25,7 +25,7 @@ const SelectDropDown = (props: any) => {
     //   vector.find((data: any) => data[removeSpace[0]] = parseInt(removeSpace[1]))
     // }
     const handleChange = (event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>) => {
-        setDropDownData(event.target.value as number)
+        setDropDownData(event.target.value as string)
         if (typeof window != "undefined" && !localStorage.getItem("vector")){
             localStorage.setItem("vector", JSON.stringify(
                 [
@@ -50,35 +50,35 @@ const SelectDropDown = (props: any) => {
         }
         if(localStorage.getItem("vector")) {
             const vector = JSON.parse(localStorage.getItem("vector") || "[]")
-            vector.find((obj: any) => obj.id === event.target.name).value = 
-            (event.target.value).split(":")[1];
+            // vector.find((obj: any) => obj.id === event.target.name).value = 
+            // (event.target.value).split(":")[1];
             localStorage.setItem("vector", JSON.stringify(vector))
             const vectorToString = Risk.vectorToString(vector)
-            console.log(vectorToString);
+            // console.log(vectorToString);
 
             const risk = Risk.stringToVector(vectorToString)
-            console.log(risk);
+            // console.log(risk);
 
             const likelihood = Risk.calculateAverage(risk.slice(0, 8));
-            console.log(likelihood);
+            // console.log(likelihood);
 
             const likelihoodLabel = Risk.rate(Number(likelihood));
-            console.log(likelihoodLabel);
+            // console.log(likelihoodLabel);
 
             const colour = Risk.colour(likelihoodLabel);
-            console.log(colour);
+            // console.log(colour);
             
             const impact = Risk.calculateAverage(risk.slice(8, 16));
-            console.log(impact);
+            // console.log(impact);
 
             const impactLabel = Risk.rate(Number(impact));
-            console.log(impactLabel);
+            // console.log(impactLabel);
 
             const criticality = Risk.criticality(likelihoodLabel, impactLabel);
-            console.log(criticality);
+            // console.log(criticality);
             
 
-            props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel, vectorToString, criticality)
+            // props.sendData(likelihood, likelihoodLabel, colour, impact, impactLabel, vectorToString, criticality)
         }
         
         
