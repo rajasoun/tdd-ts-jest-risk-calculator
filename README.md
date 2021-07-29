@@ -334,3 +334,44 @@ The model above assumes that all the factors are equally important. You can weig
 the factors that are more significant for the specific business. This makes the model a bit more complex, as 
 the evaluator needs to use a weighted average. But otherwise everything works the same. Again it is possible to 
 tune the model by matching it against risk ratings the business agrees are accurate.
+
+### TypeScript Next.js
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Getting Started
+Create a new folder and Install the required dependencies from your terminal:
+
+```bash
+npm install next react react-dom
+# or 
+yarn add next react react-dom
+```
+
+### Install required @types module
+
+@types/ prefix means that we also want to get the declaration files for React and React-DOM. Usually when you import a path like “react”, it will look inside of the react package itself; however, not all packages include declaration files, so TypeScript also looks in the @types/react package as well.
+
+Next JS has official [@zeit/next-typescript](@zeit/next-typescript) module
+
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+

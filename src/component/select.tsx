@@ -7,11 +7,11 @@ import Risk from '../risk';
 const SelectDropDown = (props: any) => {
     
     // Remove all storages at the beginning
-    useEffect(() => {
+    React.useEffect(() => {
         if (localStorage.getItem("vector")) localStorage.removeItem("vector")
     }, [])
 
-    const [dropDownData, setDropDownData] = useState('');
+    const [dropDownData, setDropDownData] = React.useState('');
 
     const handleChange = (
         event:  React.ChangeEvent<{ name?: string | undefined; value: any; }>
@@ -59,17 +59,17 @@ const SelectDropDown = (props: any) => {
             const criticality = Risk.criticality(likelihoodLabel, impactLabel);
             const criticalityColour = Risk.colour(criticality)
 
-            // props.sendData({
-            //     "likelihoodAvg": likelihoodAvg,
-            //     "likelihoodLabel": likelihoodLabel,
-            //     "likelihoodLabelColour": likelihoodLabelColour,
-            //     "impactAvg": impactAvg,
-            //     "impactLabel": impactLabel,
-            //     "impactLabelColour": impactLabelColour,
-            //     "criticality": criticality,
-            //     "criticalityColour": criticalityColour,
-            //     "vector": vectorToString
-            // })
+            props.sendData({
+                "likelihoodAvg": likelihoodAvg,
+                "likelihoodLabel": likelihoodLabel,
+                "likelihoodLabelColour": likelihoodLabelColour,
+                "impactAvg": impactAvg,
+                "impactLabel": impactLabel,
+                "impactLabelColour": impactLabelColour,
+                "criticality": criticality,
+                "criticalityColour": criticalityColour,
+                "vector": vectorToString
+            })
         }   
     };  
   
