@@ -8,18 +8,9 @@ import { configure } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
-// const dropDownData: any = [];
-// data.data.map((ele: any) => {
-//   ele.select.map((selectele: any) => {
-//       dropDownData.push(selectele)
-//   })
-// })
-
-// console.log(...dropDownData);
-
 const props = {
   "name": "skill level",
-  "id": "SL",
+  "id": "TAF_SL",
   "options": [
       {
           "name" : "Security penetration skills",
@@ -30,7 +21,7 @@ const props = {
 
 const props1 = {
   "name": "Motive",
-    "id": "M",
+    "id": "TAF_M",
     "options": [
       {
           "name" : "Low or no reward",
@@ -41,7 +32,7 @@ const props1 = {
 
 const props2 = {
   "name": "Opportunity",
-  "id": "O",
+  "id": "TAF_O",
   "options": [
     {
         "name" : "Full access or expensive resources required",
@@ -52,7 +43,7 @@ const props2 = {
 
 const props3 = {
   "name": "Size",
-  "id": "S",
+  "id": "TAF_S",
   "options": [
     {
         "name" : "Developers, System administrators",
@@ -65,44 +56,41 @@ describe("With Enzyme", () => {
   // describe.each( shallow(<SelectDropDown {dropDownData} />))
   test.concurrent('Test Threat Dropdown using shallow', () => {
     // wrapper
-    // let wrapper: any;
-    // dropDownData.map((propsdata: any) => {
-    //   wrapper = shallow(<SelectDropDown {...propsdata} />);
-    // })
+
     const wrapper = shallow(<SelectDropDown {...props} />);
     wrapper
-	.find('#dropdown_SL')
+	.find('#dropdown_TAF_SL')
 	.at(0)
-	.simulate("change", {target : { value : 'Security penetration skills (1)', name: 'Security penetration skills' }})
+	.simulate("change", {target : { value : "TAF_SL:1", name: 'TAF_SL' }})
   
-  expect(wrapper.find('#dropdown_SL').props().value).toBe('Security penetration skills (1)');
+  expect(wrapper.find('#dropdown_TAF_SL').props().value).toBe('TAF_SL:1');
 
 
   // wrapper 1
   const wrapper1 = shallow(<SelectDropDown {...props1} />);
     wrapper1
-	.find('#dropdown_M')
+	.find('#dropdown_TAF_M')
 	.at(0)
-	.simulate("change", {target : { value : 'Low or no reward (1)', name: 'Low or no reward' }})
+	.simulate("change", {target : { value : 'TAF_M:1', name: 'TAF_M' }})
   
-  expect(wrapper1.find('#dropdown_M').props().value).toBe('Low or no reward (1)');
+  expect(wrapper1.find('#dropdown_TAF_M').props().value).toBe('TAF_M:1');
 
-  // wrapper 2
+  // // wrapper 2
   const wrapper2 = shallow(<SelectDropDown {...props2} />);
     wrapper2
-	.find('#dropdown_O')
+	.find('#dropdown_TAF_O')
 	.at(0)
-	.simulate("change", {target : { value : 'Full access or expensive resources required (0)', name: 'Full access or expensive resources required' }})
+	.simulate("change", {target : { value : 'TAF_O:0', name: 'TAF_O' }})
   
-  expect(wrapper2.find('#dropdown_O').props().value).toBe('Full access or expensive resources required (0)');
+  expect(wrapper2.find('#dropdown_TAF_O').props().value).toBe('TAF_O:0');
 
-  // wrapper 3
+  // // wrapper 3
   const wrapper3 = shallow(<SelectDropDown {...props3} />);
     wrapper3
-	.find('#dropdown_S')
+	.find('#dropdown_TAF_S')
 	.at(0)
-	.simulate("change", {target : { value : 'Developers, System administrators (2)', name: 'Developers, System administrators' }})
+	.simulate("change", {target : { value : 'TAF_S:2', name: 'TAF_S' }})
   
-  expect(wrapper3.find('#dropdown_S').props().value).toBe('Developers, System administrators (2)');
+  expect(wrapper3.find('#dropdown_TAF_S').props().value).toBe('TAF_S:2');
 });
 });

@@ -59,17 +59,17 @@ const SelectDropDown = (props: any) => {
             const criticality = Risk.criticality(likelihoodLabel, impactLabel);
             const criticalityColour = Risk.colour(criticality)
 
-            props.sendData({
-                "likelihoodAvg": likelihoodAvg,
-                "likelihoodLabel": likelihoodLabel,
-                "likelihoodLabelColour": likelihoodLabelColour,
-                "impactAvg": impactAvg,
-                "impactLabel": impactLabel,
-                "impactLabelColour": impactLabelColour,
-                "criticality": criticality,
-                "criticalityColour": criticalityColour,
-                "vector": vectorToString
-            })
+            // props.sendData({
+            //     "likelihoodAvg": likelihoodAvg,
+            //     "likelihoodLabel": likelihoodLabel,
+            //     "likelihoodLabelColour": likelihoodLabelColour,
+            //     "impactAvg": impactAvg,
+            //     "impactLabel": impactLabel,
+            //     "impactLabelColour": impactLabelColour,
+            //     "criticality": criticality,
+            //     "criticalityColour": criticalityColour,
+            //     "vector": vectorToString
+            // })
         }   
     };  
   
