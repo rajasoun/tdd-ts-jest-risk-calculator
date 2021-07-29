@@ -343,19 +343,23 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Create a new folder and Install the required dependencies from your terminal:
 
 ```bash
-npm install next react react-dom
-# or 
-yarn add next react react-dom
+npx create-next-app --ts
+# or
+yarn create next-app --typescript
 ```
 
 ### Install required @types module
 
 @types/ prefix means that we also want to get the declaration files for React and React-DOM. Usually when you import a path like “react”, it will look inside of the react package itself; however, not all packages include declaration files, so TypeScript also looks in the @types/react package as well.
 
-Next JS has official [@zeit/next-typescript](@zeit/next-typescript) module
+```bash
+npm install --save-dev @types/react @types/react-dom @types/node
+# or
+yarn add --save-dev @types/react @types/react-dom @types/node
+```
 
 
-First, run the development server:
+Next, run the development server:
 
 ```bash
 npm run dev

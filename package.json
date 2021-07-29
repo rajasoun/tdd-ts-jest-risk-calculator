@@ -5,7 +5,8 @@
     "build": "tsc",
     "dev": "next dev",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "export": "next export"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
