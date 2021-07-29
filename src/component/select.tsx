@@ -14,9 +14,9 @@ const SelectDropDown = (props: any) => {
     const [dropDownData, setDropDownData] = useState('');
 
     const handleChange = (
-        event:  React.ChangeEvent<{ name?: string | undefined; value: unknown; }>
+        event:  React.ChangeEvent<{ name?: string | undefined; value: any; }>
     ) => {
-        setDropDownData(event.target.value as number)
+        setDropDownData(event.target.value as any)
         if (typeof window != "undefined" && !localStorage.getItem("vector")){
             localStorage.setItem("vector", JSON.stringify(
                 [
@@ -41,8 +41,8 @@ const SelectDropDown = (props: any) => {
         }
         if(localStorage.getItem("vector")) {
             const vector = JSON.parse(localStorage.getItem("vector") || "[]")
-            // vector.find((obj: any) => obj.id === event.target.name).value = 
-            // (event.target.value).split(":")[1];
+            vector.find((obj: any) => obj.id === event.target.name).value = 
+            (event.target.value).split(":")[1];
             localStorage.setItem("vector", JSON.stringify(vector))
 
             const vectorToString = Risk.vectorToString(vector)
