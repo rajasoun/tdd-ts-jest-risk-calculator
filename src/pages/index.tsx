@@ -22,6 +22,10 @@ interface RiskCalculation {
     vector: string
 }
 
+interface LabelVariant {
+    variant: string;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -72,14 +76,16 @@ const StyledCriticallityDiv = styled.div`
     text-align: center;
 `;
 
-const Styledlabel = styled.div`
+const Styledlabel = styled.div.attrs((props: LabelVariant) => ({
+    title: props.variant,
+}))<LabelVariant>`
     margin: 0 3rem;
     padding: 0.25rem;
     background-color: red;
     font-size: 1.15em;
     font-weight: 700;
-    ${({ variant }) => variant && css`
-       background-color: ${variant};
+    ${props => props.variant && css`
+       background-color: ${props.variant};
    `}
 `;
 

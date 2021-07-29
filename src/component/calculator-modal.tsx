@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface BackgroundVariant {
+    variant: string;
+}
+
 const StyledFooterDiv = styled.div`
     text-align: center;
     font-size: 1.15em;
@@ -88,18 +92,25 @@ const variantOptions : any = {
     },
 };
 
-const StyledTd = styled.td`
+const StyledTdNoVariant = styled.td`
     padding: 1rem;
     border-bottom: 1px solid rgb(220,220,220);
-    ${({ variant }) => variant && variantOptions[variant] && css`
-       background-color: ${variantOptions[variant].backgroundColor};
-       color: ${variantOptions[variant].color};
-       font-weight: ${variantOptions[variant].fontWeight};
+    border-right: 0.5px solid rgb(220,220,220);
+`;
+
+const StyledTd = styled.td.attrs((props: BackgroundVariant) => ({
+    title: props.variant,
+}))<BackgroundVariant>`
+    padding: 1rem;
+    border-bottom: 1px solid rgb(220,220,220);
+    ${props => props.variant && variantOptions[props.variant] && css`
+       background-color: ${variantOptions[props.variant].backgroundColor};
+       color: ${variantOptions[props.variant].color};
+       font-weight: ${variantOptions[props.variant].fontWeight};
    `}
    border-right: 0.5px solid rgb(220,220,220);
 `;
 
-// const TdColoured = 
 
 const Modal = (props: any) => {
     const classes = useStyles();
@@ -147,15 +158,15 @@ const Modal = (props: any) => {
                         </StyledTHead>
                         <tbody>
                             <tr>
-                                <StyledTd>{`0 < 3`}</StyledTd>
+                                <StyledTdNoVariant>{`0 < 3`}</StyledTdNoVariant>
                                 <StyledTd variant="green">Low</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd>{`3 to < 6`}</StyledTd>
+                                <StyledTdNoVariant>{`3 to < 6`}</StyledTdNoVariant>
                                 <StyledTd variant="orange">Medium</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd style={{borderBottom: 'none'}}>{`6 to 9`}</StyledTd>
+                                <StyledTdNoVariant style={{borderBottom: 'none'}}>{`6 to 9`}</StyledTdNoVariant>
                                 <StyledTd variant="red">High</StyledTd>
                             </tr>
                         </tbody>
@@ -171,33 +182,33 @@ const Modal = (props: any) => {
                         </StyledTHead>
                         <tbody>
                             <tr>
-                                <StyledTd rowSpan={4}>Impact</StyledTd>
-                                <StyledTd>HIGH</StyledTd>
+                                <StyledTdNoVariant rowSpan={4}>Impact</StyledTdNoVariant>
+                                <StyledTdNoVariant>HIGH</StyledTdNoVariant>
                                 <StyledTd variant="orange">Medium</StyledTd>
                                 <StyledTd variant="red">High</StyledTd>
                                 <StyledTd variant="purple">Critical</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd>MEDIUM</StyledTd>
+                                <StyledTdNoVariant>MEDIUM</StyledTdNoVariant>
                                 <StyledTd variant="yellow">Low</StyledTd>
                                 <StyledTd variant="orange">Medium</StyledTd>
                                 <StyledTd variant="red">High</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd>LOW</StyledTd>
+                                <StyledTdNoVariant>LOW</StyledTdNoVariant>
                                 <StyledTd variant="green">Note</StyledTd>
                                 <StyledTd variant="yellow">Low</StyledTd>
                                 <StyledTd variant="orange">Medium</StyledTd>
                             </tr>
                             <tr>
-                                <StyledTd></StyledTd>
-                                <StyledTd>LOW</StyledTd>
-                                <StyledTd>MEDIUM</StyledTd>
-                                <StyledTd>HIGH</StyledTd>
+                                <StyledTdNoVariant></StyledTdNoVariant>
+                                <StyledTdNoVariant>LOW</StyledTdNoVariant>
+                                <StyledTdNoVariant>MEDIUM</StyledTdNoVariant>
+                                <StyledTdNoVariant>HIGH</StyledTdNoVariant>
                             </tr>
                             <tr>
-                                <StyledTd style={{borderBottom: 'none'}}></StyledTd>
-                                <StyledTd colSpan={4} style={{borderBottom: 'none',borderRight: 'none'}}>Likelihood</StyledTd>
+                                <StyledTdNoVariant style={{borderBottom: 'none'}}></StyledTdNoVariant>
+                                <StyledTdNoVariant colSpan={4} style={{borderBottom: 'none',borderRight: 'none'}}>Likelihood</StyledTdNoVariant>
                             </tr>
                         </tbody>
                     </StyledTable>
