@@ -18,10 +18,10 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       - name: Test Application
-        run: yarn run test
+        run: npm run test
 
       # - name: Deploy Next js Application to Vercel
       #   uses: amondnet/vercel-action@v20
