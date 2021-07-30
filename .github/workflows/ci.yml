@@ -5,7 +5,7 @@ on:
     branches: [ develop ]
 
 jobs:
-  deploy_app:
+  Build-Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
         run: npm run clean
 
       - name: Install dependencies
-        run: npm install
+        run: SKIP_POST_INSTALL="yes" npm install
 
       - name: Test Application
         run: npm run test

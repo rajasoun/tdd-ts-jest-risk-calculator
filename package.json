@@ -8,7 +8,7 @@
     "export": "next export",
     "dev": "next dev",
     "start": "next start",
-    "postinstall": "npm --prefix ./shift-left install"
+    "postinstall": "shift-left/bin/post-install.sh"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
