@@ -1,23 +1,46 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from "@testing-library/react";
-import Index from "../src/pages/index"
+import Index, { getStaticProps } from "../src/pages/index";
+import data from "../src/data/risk-calculator.json"
+import risk from "../src/risk";
 
-describe("Index Component", () => {
+const { getByTestId } = render(<Index data={data}/>);
 
-    const wrapper = render(<Index />);
-
-    test.concurrent("Check for page header", () => {
+describe("Page Header ", () => {
+    test.concurrent("$header", () => {
         expect(
-            wrapper.getByTestId("header").textContent
+            getByTestId("header").textContent
         ).toEqual(
             "Risk Assessment Calculator"
         )
     })
+})
 
-    test.concurrent("Select Options", () => {
-        const select = wrapper.getByTestId('0')
-        fireEvent.change(select, { target: { value: '1' } })
-        expect((select as HTMLOptionElement).value).toEqual('1')
-    })
-
+describe("Select Dropdown and Create Vector", () => {
+    describe.each`
+        id     |  name     |  value
+        ${0}   |  ${"SL"}  |  ${1}
+        ${1}   |  ${"M"}   |  ${4}
+        ${2}   |  ${"O"}   |  ${4}
+        ${3}   |  ${"S"}   |  ${2}
+        ${4}   |  ${"ED"}  |  ${1}
+        ${5}   |  ${"EE"}  |  ${9}
+        ${6}   |  ${"A"}   |  ${1}
+        ${7}   |  ${"ID"}  |  ${0}
+        ${8}   |  ${"LC"}  |  ${2}
+        ${9}   |  ${"LI"}  |  ${7}
+        ${10}  |  ${"LAV"} |  ${9}
+        ${11}  |  ${"LAC"} |  ${0}
+        ${12}  |  ${"FD"}  |  ${3}
+        ${13}  |  ${"RD"}  |  ${4}
+        ${14}  |  ${"NC"}  |  ${2}
+        ${15}  |  ${"PV"}  |  ${9}
+    `("$select dropdown", ({ id, name, value }) => {
+        test.concurrent(`selected id ${id} and wanted ${value} with the name ${name}`, () => {
+            const select = getByTestId(id)
+            fireEvent.change(select, { target: { value: value } })
+            expect(Number((select as HTMLOptionElement).value)).toEqual(value)
+            expect((select as HTMLSelectElement).name).toEqual(name)
+        });
+    });
 })

@@ -1,6 +1,16 @@
 import Head from 'next/head';
+import { GetStaticProps } from 'next'
+import data from '../data/risk-calculator.json';
 
-const Index = () => {
+export const getStaticProps: GetStaticProps = async (context) => {
+    return {
+        props: {
+            data: data
+        }
+    }
+}
+
+const Index = ({data}: any) => {
     return (
         <>
             <Head>
@@ -8,11 +18,28 @@ const Index = () => {
             </Head>
             <h1 data-testid="header">Risk Assessment Calculator</h1>
             <hr />
-            <select  data-testid="0">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-            </select>
+            {
+                data.data.map((ele: any, index: number) => (
+                    <div key={`RAC_${index}`}>
+                    {
+                        ele.select.map((data: any) => (
+                            <select key={data.id} data-testid={data.id} name={data.name}>
+                                {
+                                    data.options.map((option: any, i: any) => (
+                                        <option
+                                            key={`${data.name}__${i}`}
+                                            value={option.value}
+                                        >
+                                            {option.name}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        ))
+                    }
+                    </div>
+                ))
+            }
         </>
     )
 }
