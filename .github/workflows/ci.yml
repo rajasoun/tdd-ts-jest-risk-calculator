@@ -12,10 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node v14.x
+      - name: Setup Node v16.x
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '16'
+
+      - name: Clean Node Modules
+        run: npm run clean
 
       - name: Install dependencies
         run: npm install
