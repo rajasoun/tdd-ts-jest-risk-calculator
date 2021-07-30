@@ -11,7 +11,7 @@
         "update-npm-packages": "npm update",
         "lint-staged": "lint-staged",
         "lint-fix": "eslint ./src --ext .ts --cache --fix",
-        "postinstall": "node bin/check-version.js && cd .. && husky install ",
+        "postinstall": "cd .. && husky install ",
         "release": "release-it"
     },
     "engines": {
