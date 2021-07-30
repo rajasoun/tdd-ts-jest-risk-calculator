@@ -2,12 +2,16 @@
     "data": [
         {
             "title": "Threat Agent Factors",
-            "gridSize": 5,
             "select": [
                 {
-                    "name": "Skill level",
-                    "id": "TAF_SL",
+                    "description": "Skill level",
+                    "name": "SL",
+                    "id": 0,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Security penetration skills",
                             "value" : 1
@@ -31,9 +35,14 @@
                     ]
                 },
                 {
-                    "name": "Motive",
-                    "id": "TAF_M",
+                    "description": "Motive",
+                    "name": "M",
+                    "id": 1,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Low or no reward",
                             "value" : 1
@@ -49,9 +58,14 @@
                     ]
                 },
                 {
-                    "name": "Opportunity",
-                    "id": "TAF_O",
+                    "description": "Opportunity",
+                    "name": "O",
+                    "id": 2,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Full access or expensive resources required",
                             "value" : 0
@@ -75,9 +89,14 @@
                     ]
                 },
                 {
-                    "name": "Size",
-                    "id": "TAF_S",
+                    "description": "Size",
+                    "name": "S",
+                    "id": 3,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Developers, System administrators",
                             "value" : 2
@@ -104,12 +123,16 @@
         },
         {
             "title": "Vulnerability Factors",
-            "gridSize": 5,
             "select": [
                 {
-                    "name": "Ease of discovery",
-                    "id": "VF_ED",
+                    "description": "Ease of discovery",
+                    "name": "ED",
+                    "id": 4,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Practically impossible",
                             "value" : 1
@@ -129,9 +152,14 @@
                     ]
                 },
                 {
-                    "name": "Ease of exploit",
-                    "id": "VF_EE",
+                    "description": "Ease of exploit",
+                    "name": "EE",
+                    "id": 5,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Theoretical",
                             "value" : 1
@@ -151,9 +179,14 @@
                     ]
                 },
                 {
-                    "name": "Awareness",
-                    "id": "VF_A",
+                    "description": "Awareness",
+                    "name": "A",
+                    "id": 6,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Unknown",
                             "value" : 1
@@ -173,9 +206,14 @@
                     ]
                 },
                 {
-                    "name": "Intrusion detection",
-                    "id": "VF_ID",
+                    "description": "Intrusion detection",
+                    "name": "ID",
+                    "id": 7,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Developers",
                             "value" : 2
@@ -205,17 +243,17 @@
             ]
         },
         {
-            "label": "Likelihood",
-            "gridSize": 2
-        },
-        {
             "title": "Technical Impact Factors",
-            "gridSize": 5,
             "select": [
                 {
-                    "name": "Loss of confidentiality",
-                    "id": "TMF_LC",
+                    "description": "Loss of confidentiality",
+                    "name": "LC",
+                    "id": 8,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Minimal non-sensitive data disclosed",
                             "value" : 2
@@ -239,9 +277,14 @@
                     ]
                 },
                 {
-                    "name": "Loss of integrity",
-                    "id": "TMF_LI",
+                    "description": "Loss of integrity",
+                    "name": "LI",
+                    "id": 9,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Minimal slightly corrupt data",
                             "value" : 1
@@ -265,9 +308,14 @@
                     ]
                 },
                 {
-                    "name": "Loss of availability",
-                    "id": "TMF_LAV",
+                    "description": "Loss of availability",
+                    "name": "LAV",
+                    "id": 10,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Minimal secondary services interrupted",
                             "value" : 1
@@ -291,9 +339,14 @@
                     ]
                 },
                 {
-                    "name": "Loss of accountability",
-                    "id": "TMF_LAC",
+                    "description": "Loss of accountability",
+                    "name": "LAC",
+                    "id": 11,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Fully traceable",
                             "value" : 1
@@ -315,9 +368,14 @@
             "gridSize": 5,
             "select": [
                 {
-                    "name": "Financial damage",
-                    "id": "BIF_FD",
+                    "description": "Financial damage",
+                    "name": "FD",
+                    "id": 12,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Less than the cost to fix the vulnerability",
                             "value" : 1
@@ -337,9 +395,14 @@
                     ]
                 },
                 {
-                    "name": "Reputation damage",
-                    "id": "BIF_RD",
+                    "description": "Reputation damage",
+                    "name": "RD",
+                    "id": 13,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Minimal damage",
                             "value" : 1
@@ -359,9 +422,14 @@
                     ]
                 },
                 {
-                    "name": "Non-compliance",
-                    "id": "BIF_NC",
+                    "description": "Non-compliance",
+                    "name": "NC",
+                    "id": 14,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "Minor violation",
                             "value" : 2
@@ -381,9 +449,14 @@
                     ]
                 },
                 {
-                    "name": "Privacy violation",
-                    "id": "BIF_PV",
+                    "description": "Privacy violation",
+                    "name": "PV",
+                    "id": 15,
                     "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
                         {
                             "name" : "One individual",
                             "value" : 3
@@ -403,10 +476,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "label": "Impact",
-            "gridSize": 2
         }
     ]
 }
