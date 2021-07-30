@@ -5,6 +5,7 @@
     "clean": "rm -fr node_modules shift-left/node_modules .next coverage",
     "build": "next build && next export",
     "test": "jest",
+    "repl": "npx ts-node",
     "export": "next export",
     "dev": "next dev",
     "start": "next start",
