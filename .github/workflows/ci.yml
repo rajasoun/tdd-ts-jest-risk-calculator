@@ -7,7 +7,7 @@ on:
 jobs:
   deploy_app:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -30,9 +30,9 @@ jobs:
       #     vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  #Required
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} #Required 
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} #Required
       #     scope: ${{ secrets.VERCEL_TEAM_ID }}
-          
+
       # - name: Run Lighthouse
       #   uses: foo-software/lighthouse-check-action@master
       #   with:

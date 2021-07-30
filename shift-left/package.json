@@ -1,0 +1,41 @@
+{
+    "name": "conventions",
+    "version": "0.0.1",
+    "description": "Code Conventions",
+    "author": "Raja. S",
+    "license": "ISC",
+    "private": true,
+    "scripts": {
+        "list-installed-npm-packages": "npm ls --depth=0.",
+        "list-outdated-npm-packages": "npm outdated --depth=0.",
+        "update-npm-packages": "npm update",
+        "lint-staged": "lint-staged",
+        "postinstall": "node bin/check-version.js && cd .. && husky install ",
+        "release": "release-it"
+    },
+    "engines": {
+        "node": ">= 14.17.3",
+        "npm": ">= 7.19.1"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^12.1.4",
+        "@commitlint/config-conventional": "^12.1.4",
+        "auto-changelog": "^2.3.0",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^7.30.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.23.4",
+        "eslint-plugin-prettier": "^3.4.0",
+        "lint-staged": "^11.0.0",
+        "pinst": "^2.1.6",
+        "prettier": "2.3.2",
+        "release-it": "^14.10.0",
+        "semver": "^7.3.5"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./shift-left/node_modules/cz-conventional-changelog"
+        }
+    }
+}

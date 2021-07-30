@@ -53,7 +53,7 @@ class Risk {
 
   /**
   * Threat Index - Vector to JSON
-  * Vector is converted to JSON for easy storage 
+  * Vector is converted to JSON for easy storage
   * @param {Array<ThreatVector>} - Input Vector of Impact & Likelihood
   *                                (16 parameters)
   * @return {string } JSON String transfornmed from input vector
@@ -65,7 +65,7 @@ class Risk {
 
   /**
  * Threat Index - JSON to Vector
- * Vector is converted to JSON for easy storage 
+ * Vector is converted to JSON for easy storage
  * @param {string}                -  JSON Input String of Impact & Likelihood
  *                                (16 parameters)
  * @return {Array<ThreatVector> } Array of ThreatVector

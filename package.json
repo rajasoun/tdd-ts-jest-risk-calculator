@@ -6,7 +6,8 @@
     "dev": "next dev",
     "start": "next start",
     "test": "jest",
-    "export": "next export"
+    "export": "next export",
+    "postinstall": "npm --prefix shift-left install"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
