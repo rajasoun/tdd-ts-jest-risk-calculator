@@ -2,15 +2,9 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next'
 import data from '../data/risk-calculator.json';
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    return {
-        props: {
-            data: data
-        }
-    }
-}
+export const getStaticProps: GetStaticProps = async () => ({ props: { data } })
 
-const Index = ({data}: any) => {
+const Index = ({ data }: any) => {
     return (
         <>
             <Head>

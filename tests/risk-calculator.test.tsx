@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from "@testing-library/react";
-import Index, { getStaticProps } from "../src/pages/index";
+import Index from "../src/pages/index";
 import data from "../src/data/risk-calculator.json"
 import risk from "../src/risk";
 
