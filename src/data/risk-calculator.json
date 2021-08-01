@@ -1,4 +1,22 @@
 {
+    "initialVector": [
+        {"id": 0, "name": "SL", "value": 0},
+        {"id": 1, "name": "M", "value": 0},
+        {"id": 2, "name": "0", "value": 0},
+        {"id": 3, "name": "S", "value": 0},
+        {"id": 4, "name": "ED", "value": 0},
+        {"id": 5, "name": "EE", "value": 0},
+        {"id": 6, "name": "A", "value": 0},
+        {"id": 7, "name": "ID", "value": 0},
+        {"id": 8, "name": "LC", "value": 0},
+        {"id": 9, "name": "LI", "value": 0},
+        {"id": 10, "name": "LAV", "value": 0},
+        {"id": 11, "name": "LAC", "value": 0},
+        {"id": 12, "name": "FD", "value": 0},
+        {"id": 13, "name": "RD", "value": 0},
+        {"id": 14, "name": "NC", "value": 0},
+        {"id": 15, "name": "PV", "value": 0}
+    ],
     "data": [
         {
             "title": "Threat Agent Factors",
