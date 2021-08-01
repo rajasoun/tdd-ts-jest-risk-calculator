@@ -29,10 +29,10 @@ describe("On change of", () => {
     describe.each`
         inputJson     |  wantedVector              | likelyhoodAverageScore     | likelyhoodLabel       | likelyhoodLabelColour
         ${Q1}         |  ${wantedVectorForQ1}      | ${'0.125'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}
-        ${Q2}         |  ${wantedVectorForQ2}      | ${'0.625'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}              
+        ${Q2}         |  ${wantedVectorForQ2}      | ${'0.625'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}
         ${Q3}         |  ${wantedVectorForQ3}      | ${'1.250'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}
         ${Q4}         |  ${wantedVectorForQ4}      | ${'2.000'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}
-        ${Q5}         |  ${wantedVectorForQ5}      | ${'1.875'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}               
+        ${Q5}         |  ${wantedVectorForQ5}      | ${'1.875'}                 | ${'Low'}              | ${'rgba(255, 255, 0)'}
     `("$dropdown", ({ inputJson, wantedVector, likelyhoodAverageScore, likelyhoodLabel, likelyhoodLabelColour }) => {
         test.concurrent(
             `JSON string ${inputJson},to retrun the following vector ${wantedVector}`, () => {
