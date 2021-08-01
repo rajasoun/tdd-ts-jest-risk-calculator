@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react";
 import Index, { generateThreatVectorJSON } from "../src/pages/index";
 import Risk from '../src/risk';
 
-const { getByTestId } = render(<Index />);
+const { getByTestId, getByText } = render(<Index />);
 
 describe("Page Header ", () => {
     test.concurrent("$header", () => {
@@ -51,6 +51,14 @@ describe("On change of", () => {
         });
     });
 });
+
+describe("On Change dropdown change the vector datas", () => {
+    const vectorLabel = getByText('VECTOR:');
+    expect(vectorLabel as HTMLLabelElement).toBeInTheDocument()
+    const anchorTag = getByText('(SL:0/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:0/RD:0/NC:0/PV:0)')
+    expect((anchorTag as HTMLAnchorElement).closest('a')).toHaveAttribute('href', '#')
+})
+
 
 describe("On change", () => {
     describe.each`

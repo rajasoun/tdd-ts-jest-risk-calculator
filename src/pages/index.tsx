@@ -31,10 +31,13 @@ const styleSelect = {
     minWidth: 400
 }
 
+const styleCritical = {
+    margin: '-6rem -12rem 0rem 0',
+}
 // Styles for element ends
 
 let initialVector = data.initialVector
-
+let setVectorToString: any;
 export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => {
     const vector = initialVector.map(
         obj => obj.id === json.id && obj.name === json.name ? { ...obj, value: json.value } : obj
@@ -73,7 +76,8 @@ const Index = () => {
     const [impactLabel, setImpactLabel] = useState('');
     const [likelihoodLabelColor, setLikelihoodLabelColor] = useState('');
     const [impactLabelColor, setImpactLabelColor] = useState('');
-
+    const [criticalityLabel, setCriticalityLabel] = useState('')
+    const [criticalityColor, setCriticalityColor] = useState('')
     const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
@@ -82,6 +86,8 @@ const Index = () => {
         }
         // Generate Threat Vecor
         const risk = generateThreatVectorJSON(json);
+        // Set vector to String
+        setVectorToString = Risk.vectorToString(risk)
         // Likelihood Average Score
         const likelihoodAvgScore = Risk.calculateAverage(risk.slice(0, 8));
         setLikelihoodAvg(likelihoodAvgScore);
@@ -89,17 +95,23 @@ const Index = () => {
         const impactAvgScore = Risk.calculateAverage(risk.slice(8, 16));
         setImpactAvg(impactAvgScore);
          // Likelihood Label
-        const likelihoodLabelValue = Risk.rate(Number(likelihoodAvgScore))
-        setLikelihoodLabel(likelihoodLabelValue)
+        const likelihoodLabelValue = Risk.rate(Number(likelihoodAvgScore));
+        setLikelihoodLabel(likelihoodLabelValue);
          // Impact Label
-        const impactLabelValue = Risk.rate(Number(impactAvgScore))
-        setImpactLabel(impactLabelValue)
+        const impactLabelValue = Risk.rate(Number(impactAvgScore));
+        setImpactLabel(impactLabelValue);
         // Likelihood Color
         const likelihoodLabelColorCode = Risk.colour(likelihoodLabelValue);
-        setLikelihoodLabelColor(likelihoodLabelColorCode)
+        setLikelihoodLabelColor(likelihoodLabelColorCode);
         // Impact Color
         const impactLabelColorCode = Risk.colour(impactLabelValue);
-        setImpactLabelColor(impactLabelColorCode)
+        setImpactLabelColor(impactLabelColorCode);
+        // Criticality Label
+        const criticality = Risk.criticality(likelihoodLabelValue, impactLabelValue)
+        setCriticalityLabel(criticality);
+        // Criticality Color
+        const CriticalityColor = Risk.colour(criticality);
+        setCriticalityColor(CriticalityColor);
 
         return likelihoodAvgScore
     }
@@ -178,6 +190,34 @@ const Index = () => {
                             </div>
                         ))
                     }
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-12 text-center">
+                                <div className="float-right" style={styleCritical}>
+                                    <h3>RISK SEVERITY</h3>
+                                    <label className="text-uppercase px-4 py-1"
+                                        style={{ backgroundColor: criticalityColor}}
+                                    >
+                                        <b>{criticalityLabel}</b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-12 text-center">
+                            <label>
+                                VECTOR: 
+                                <a href="#" target="_blank" data-testid="anchorTag">
+                                    {
+                                    setVectorToString ? setVectorToString : '(SL:0/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:0/RD:0/NC:0/PV:0)'
+                                    }
+                                    </a>
+                            </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
