@@ -30,6 +30,7 @@ const styleSelect = {
     margin: '0.75rem 1rem',
     minWidth: 400
 }
+
 // Styles for element ends
 
 let initialVector = data.initialVector
@@ -46,26 +47,33 @@ const LabelLayout = (props: any) => {
     const data = props
 
     return (
-        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
-            <h1>{data.title}</h1>
+        <div className="text-center mt-5 pt-2">
+            <h3 className="text-uppercase">{data.title}</h3>
             {
                 data.avg && (
                     <div>
-                        <h3>{data.avg}</h3>
-                        <label style={{backgroundColor: data.color}}>{data.label}</label>
+                        <h4 className="my-2">{data.avg}</h4>
+                        <label className="text-uppercase px-4 py-1"
+                            style={{ backgroundColor: data.color }}
+                        >
+                            <b>{data.label}</b>
+                        </label>
                     </div>
                 )
             }
         </div>
     )
 }
+
 const Index = () => {
+
     const [likelihoodAvg, setLikelihoodAvg] = useState('');
     const [impactAvg, setImpactAvg] = useState('');
     const [likelihoodLabel, setLikelihoodLabel] = useState('');
     const [impactLabel, setImpactLabel] = useState('');
     const [likelihoodLabelColor, setLikelihoodLabelColor] = useState('');
     const [impactLabelColor, setImpactLabelColor] = useState('');
+
     const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
@@ -92,7 +100,6 @@ const Index = () => {
         // Impact Color
         const impactLabelColorCode = Risk.colour(impactLabelValue);
         setImpactLabelColor(impactLabelColorCode)
-
 
         return likelihoodAvgScore
     }
@@ -152,15 +159,15 @@ const Index = () => {
                                                     </div>
                                                 </div>
                                             ))
-                                        : ele.label === 'Likelihood' ? 
-                                        <LabelLayout 
+                                        : ele.label === 'Likelihood' ?
+                                        <LabelLayout
                                             title={ele.label}
                                             avg={likelihoodAvg}
                                             label={likelihoodLabel}
                                             color={likelihoodLabelColor}
                                         />
-                                        : 
-                                        <LabelLayout 
+                                        :
+                                        <LabelLayout
                                             title={ele.label}
                                             avg={impactAvg}
                                             label={impactLabel}
