@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from "@testing-library/react";
-import Index, { generateThreatVector } from "../src/pages/index";
-import risk from "../src/risk";
+import Index, { generateThreatVectorJSON } from "../src/pages/index";
 
 const { getByTestId } = render(<Index />);
 
@@ -12,8 +11,35 @@ describe("Page Header ", () => {
         ).toEqual(
             "Risk Assessment Calculator"
         )
-    })
-})
+    });
+});
+
+describe("On change of", () => {
+    const Q1 = {id: 0, name: "SL", value: 1};
+    const Q2 = {id: 1, name: "M", value: 4};
+    const Q3 = {id: 5, name: "EE", value: 5};
+    const Q4 = {id: 3, name: "S", value: 6};
+    const Q5 = {id: 0, name: "SL", value: 0};
+    const wantedVectorForQ1 = [{id: 0, name: "SL", value: 1},{id: 1, name: "M", value: 0},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 0},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 0},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
+    const wantedVectorForQ2 = [{id: 0, name: "SL", value: 1},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 0},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 0},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
+    const wantedVectorForQ3 = [{id: 0, name: "SL", value: 1},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 0},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 5},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
+    const wantedVectorForQ4 = [{id: 0, name: "SL", value: 1},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 6},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 5},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
+    const wantedVectorForQ5 = [{id: 0, name: "SL", value: 0},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 6},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 5},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
+    describe.each`
+        inputJson     |  wantedVector
+        ${Q1}         |  ${wantedVectorForQ1}
+        ${Q2}         |  ${wantedVectorForQ2}
+        ${Q3}         |  ${wantedVectorForQ3}
+        ${Q4}         |  ${wantedVectorForQ4}
+        ${Q5}         |  ${wantedVectorForQ5}
+    `("$dropdown", ({ inputJson, wantedVector }) => {
+        test.concurrent(
+            `JSON string ${inputJson},to retrun the following vector ${wantedVector}`, () => {
+            const vector = generateThreatVectorJSON(inputJson)
+            expect(vector).toEqual(wantedVector)
+        });
+    });
+});
 
 describe("On change", () => {
     describe.each`
@@ -42,18 +68,4 @@ describe("On change", () => {
             expect((select as HTMLSelectElement).name).toEqual(name)
         });
     });
-})
-
-describe("On select of", () => {
-    const Q1 = {id: 0, name: "SL", value: 0}
-    const wantedVectorForQ1 = [{id: 0, name: "SL", value: 0},{id: 1, name: "M", value: 0},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 0},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 0},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}]
-    describe.each`
-        inputJsonString     |  wantedVector
-        ${Q1}               |  ${wantedVectorForQ1}
-    `("$selected", ({ inputJsonString, wantedVector }) => {
-        test.concurrent(`JSON string ${inputJsonString},to retrun the following vector ${wantedVector}`, () => {
-            const vector = generateThreatVector(inputJsonString)
-            expect(vector).toEqual(JSON.stringify(wantedVector))
-        });
-    });
-})
+});

@@ -1,5 +1,5 @@
 import data from '../data/risk-calculator.json';
-import Risk, { ThreatVector } from '../risk'
+import Risk, { ThreatVector } from '../risk';
 
 interface Option {
     name: string,
@@ -31,13 +31,29 @@ const styleSelect = {
 }
 // Styles for element ends
 
-export const generateThreatVector = (json: ThreatVector): string => {
-    const initialVector = data.initialVector;
-    const vector = Risk.vectorToJson(initialVector);
+let initialVector = data.initialVector
+
+export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => {
+    const vector = initialVector.map(
+        obj => obj.id === json.id && obj.name === json.name ? { ...obj, value: json.value } : obj
+    );
+    initialVector = vector;
     return vector;
 }
 
 const Index = () => {
+
+    const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
+        let json = {
+            id: Number(event.target.id),
+            name: event.target.name,
+            value: Number(event.target.value)
+        }
+        const risk = generateThreatVectorJSON(json)
+        const likelihoodAvg = Risk.calculateAverage(risk.slice(0, 8));
+        return likelihoodAvg
+    }
+
     return (
         <>
             <h1
@@ -71,10 +87,12 @@ const Index = () => {
                                                     </label>
                                                     <select
                                                         data-testid={data.id}
+                                                        id={String(data.id)}
                                                         name={data.name}
                                                         className="form-control"
                                                         style={styleSelect}
-                                                        >
+                                                        onChange={handleChange}
+                                                    >
                                                         {
                                                             data.options.map(
                                                                 (option: Option, i: number) => (
