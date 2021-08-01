@@ -30,6 +30,15 @@ const styleSelect = {
     margin: '0.75rem 1rem',
     minWidth: 400
 }
+
+const styleLabel = {
+    margin: '0 3rem',
+    padding: '0.25rem',
+    fontSize: '1.15em',
+    fontWeight: 700
+}
+
+
 // Styles for element ends
 
 let initialVector = data.initialVector
@@ -52,7 +61,7 @@ const LabelLayout = (props: any) => {
                 data.avg && (
                     <div>
                         <h3>{data.avg}</h3>
-                        <label style={{backgroundColor: data.color}}>{data.label}</label>
+                        <label style={{backgroundColor: data.color}}><span style={styleLabel}>{data.label}</span></label>
                     </div>
                 )
             }
@@ -92,7 +101,6 @@ const Index = () => {
         // Impact Color
         const impactLabelColorCode = Risk.colour(impactLabelValue);
         setImpactLabelColor(impactLabelColorCode)
-
 
         return likelihoodAvgScore
     }

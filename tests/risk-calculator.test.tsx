@@ -47,7 +47,7 @@ describe("On change of", () => {
             expect(likelihoodLabel).toEqual(likelyhoodLabel);
             // Likelihood Color
             const likelihoodLabelColour = Risk.colour(likelihoodLabel);
-            expect(likelihoodLabelColour).toEqual(likelyhoodLabelColour)
+            expect(likelihoodLabelColour).toEqual(likelyhoodLabelColour)    
         });
     });
 });
