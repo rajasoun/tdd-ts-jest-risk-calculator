@@ -52,7 +52,7 @@ const LabelLayout = (props: any) => {
                 data.avg && (
                     <div>
                         <h3>{data.avg}</h3>
-                        {/* <label>{data.label}</label> */}
+                        <label style={{backgroundColor: data.color}}>{data.label}</label>
                     </div>
                 )
             }
@@ -62,17 +62,37 @@ const LabelLayout = (props: any) => {
 const Index = () => {
     const [likelihoodAvg, setLikelihoodAvg] = useState('');
     const [impactAvg, setImpactAvg] = useState('');
+    const [likelihoodLabel, setLikelihoodLabel] = useState('');
+    const [impactLabel, setImpactLabel] = useState('');
+    const [likelihoodLabelColor, setLikelihoodLabelColor] = useState('');
+    const [impactLabelColor, setImpactLabelColor] = useState('');
     const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
             name: event.target.name,
             value: Number(event.target.value)
         }
+        // Generate Threat Vecor
         const risk = generateThreatVectorJSON(json);
+        // Likelihood Average Score
         const likelihoodAvgScore = Risk.calculateAverage(risk.slice(0, 8));
         setLikelihoodAvg(likelihoodAvgScore);
-        const impactAvgScore = Risk.calculateAverage(risk.slice(8, 15));
+         // Impact Average Score
+        const impactAvgScore = Risk.calculateAverage(risk.slice(8, 16));
         setImpactAvg(impactAvgScore);
+         // Likelihood Label
+        const likelihoodLabelValue = Risk.rate(Number(likelihoodAvgScore))
+        setLikelihoodLabel(likelihoodLabelValue)
+         // Impact Label
+        const impactLabelValue = Risk.rate(Number(impactAvgScore))
+        setImpactLabel(impactLabelValue)
+        // Likelihood Color
+        const likelihoodLabelColorCode = Risk.colour(likelihoodLabelValue);
+        setLikelihoodLabelColor(likelihoodLabelColorCode)
+        // Impact Color
+        const impactLabelColorCode = Risk.colour(impactLabelValue);
+        setImpactLabelColor(impactLabelColorCode)
+
 
         return likelihoodAvgScore
     }
@@ -136,11 +156,15 @@ const Index = () => {
                                         <LabelLayout 
                                             title={ele.label}
                                             avg={likelihoodAvg}
+                                            label={likelihoodLabel}
+                                            color={likelihoodLabelColor}
                                         />
                                         : 
                                         <LabelLayout 
                                             title={ele.label}
                                             avg={impactAvg}
+                                            label={impactLabel}
+                                            color={impactLabelColor}
                                         />
                                     }
                                 </div>
