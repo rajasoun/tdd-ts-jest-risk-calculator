@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import data from '../data/risk-calculator.json';
 import Risk, { ThreatVector } from '../risk';
 
@@ -41,17 +42,39 @@ export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => 
     return vector;
 }
 
-const Index = () => {
+const LabelLayout = (props: any) => {
+    const data = props
 
+    return (
+        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
+            <h1>{data.title}</h1>
+            {
+                data.avg && (
+                    <div>
+                        <h3>{data.avg}</h3>
+                        {/* <label>{data.label}</label> */}
+                    </div>
+                )
+            }
+        </div>
+    )
+}
+const Index = () => {
+    const [likelihoodAvg, setLikelihoodAvg] = useState('');
+    const [impactAvg, setImpactAvg] = useState('');
     const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
             name: event.target.name,
             value: Number(event.target.value)
         }
-        const risk = generateThreatVectorJSON(json)
-        const likelihoodAvg = Risk.calculateAverage(risk.slice(0, 8));
-        return likelihoodAvg
+        const risk = generateThreatVectorJSON(json);
+        const likelihoodAvgScore = Risk.calculateAverage(risk.slice(0, 8));
+        setLikelihoodAvg(likelihoodAvgScore);
+        const impactAvgScore = Risk.calculateAverage(risk.slice(8, 15));
+        setImpactAvg(impactAvgScore);
+
+        return likelihoodAvgScore
     }
 
     return (
@@ -79,35 +102,46 @@ const Index = () => {
                                         {ele.title}
                                     </div>
                                     {
-                                        ele.select.map((data: Select) => (
-                                            <div key={data.id}>
-                                                <div className="form-group">
-                                                    <label style={styleSelectLabel}>
-                                                        {data.description}
-                                                    </label>
-                                                    <select
-                                                        data-testid={data.id}
-                                                        id={String(data.id)}
-                                                        name={data.name}
-                                                        className="form-control"
-                                                        style={styleSelect}
-                                                        onChange={handleChange}
-                                                    >
-                                                        {
-                                                            data.options.map(
-                                                                (option: Option, i: number) => (
-                                                                <option
-                                                                    key={`${data.name}__${i}`}
-                                                                    value={option.value}
-                                                                >
-                                                                    {option.name} ({option.value})
-                                                                </option>
-                                                            ))
-                                                        }
-                                                    </select>
+                                        !ele.label?
+                                            ele.select.map((data: Select) => (
+                                                <div key={data.id}>
+                                                    <div className="form-group">
+                                                        <label style={styleSelectLabel}>
+                                                            {data.description}
+                                                        </label>
+                                                        <select
+                                                            data-testid={data.id}
+                                                            id={String(data.id)}
+                                                            name={data.name}
+                                                            className="form-control"
+                                                            style={styleSelect}
+                                                            onChange={handleChange}
+                                                        >
+                                                            {
+                                                                data.options.map(
+                                                                    (option: Option, i: number) => (
+                                                                    <option
+                                                                        key={`${data.name}__${i}`}
+                                                                        value={option.value}
+                                                                    >
+                                                                        {option.name} ({option.value})
+                                                                    </option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))
+                                            ))
+                                        : ele.label === 'Likelihood' ? 
+                                        <LabelLayout 
+                                            title={ele.label}
+                                            avg={likelihoodAvg}
+                                        />
+                                        : 
+                                        <LabelLayout 
+                                            title={ele.label}
+                                            avg={impactAvg}
+                                        />
                                     }
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, fireEvent } from "@testing-library/react";
 import Index, { generateThreatVectorJSON } from "../src/pages/index";
+import Risk from '../src/risk';
 
 const { getByTestId } = render(<Index />);
 
@@ -26,17 +27,19 @@ describe("On change of", () => {
     const wantedVectorForQ4 = [{id: 0, name: "SL", value: 1},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 6},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 5},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
     const wantedVectorForQ5 = [{id: 0, name: "SL", value: 0},{id: 1, name: "M", value: 4},{id: 2, name: "0", value: 0},{id: 3, name: "S", value: 6},{id: 4, name: "ED", value: 0},{id: 5, name: "EE", value: 5},{id: 6, name: "A", value: 0},{id: 7, name: "ID", value: 0},{id: 8, name: "LC", value: 0},{id: 9, name: "LI", value: 0},{id: 10, name: "LAV", value: 0},{id: 11, name: "LAC", value: 0},{id: 12, name: "FD", value: 0},{id: 13, name: "RD", value: 0},{id: 14, name: "NC", value: 0},{id: 15, name: "PV", value: 0}];
     describe.each`
-        inputJson     |  wantedVector
-        ${Q1}         |  ${wantedVectorForQ1}
-        ${Q2}         |  ${wantedVectorForQ2}
-        ${Q3}         |  ${wantedVectorForQ3}
-        ${Q4}         |  ${wantedVectorForQ4}
-        ${Q5}         |  ${wantedVectorForQ5}
-    `("$dropdown", ({ inputJson, wantedVector }) => {
+        inputJson     |  wantedVector              | likelyhoodAverageScore
+        ${Q1}         |  ${wantedVectorForQ1}      | ${'0.125'}
+        ${Q2}         |  ${wantedVectorForQ2}      | ${'0.625'}
+        ${Q3}         |  ${wantedVectorForQ3}      | ${'1.250'}
+        ${Q4}         |  ${wantedVectorForQ4}      | ${'2.000'}
+        ${Q5}         |  ${wantedVectorForQ5}      | ${'1.875'}
+    `("$dropdown", ({ inputJson, wantedVector, likelyhoodAverageScore }) => {
         test.concurrent(
             `JSON string ${inputJson},to retrun the following vector ${wantedVector}`, () => {
             const vector = generateThreatVectorJSON(inputJson)
             expect(vector).toEqual(wantedVector)
+            const likelihoodAvgScore = Risk.calculateAverage(vector.slice(0, 8))
+            expect(likelihoodAvgScore).toEqual(likelyhoodAverageScore)
         });
     });
 });
