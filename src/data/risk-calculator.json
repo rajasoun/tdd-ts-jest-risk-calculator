@@ -2,7 +2,7 @@
     "initialVector": [
         {"id": 0, "name": "SL", "value": 0},
         {"id": 1, "name": "M", "value": 0},
-        {"id": 2, "name": "0", "value": 0},
+        {"id": 2, "name": "O", "value": 0},
         {"id": 3, "name": "S", "value": 0},
         {"id": 4, "name": "ED", "value": 0},
         {"id": 5, "name": "EE", "value": 0},

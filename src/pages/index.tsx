@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { string } from 'yargs';
 import data from '../data/risk-calculator.json';
 import Risk, { ThreatVector } from '../risk';
 
@@ -37,7 +38,8 @@ const styleCritical = {
 // Styles for element ends
 
 let initialVector = data.initialVector
-let setVectorToString: any;
+let vectorToString = Risk.vectorToString(initialVector);
+
 export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => {
     const vector = initialVector.map(
         obj => obj.id === json.id && obj.name === json.name ? { ...obj, value: json.value } : obj
@@ -47,11 +49,10 @@ export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => 
 }
 
 const LabelLayout = (props: any) => {
-    const data = props
-
+    const data = props.data
     return (
         <div className="text-center mt-5 pt-2">
-            <h3 className="text-uppercase">{data.title}</h3>
+            <h3 className="text-uppercase">{props.title}</h3>
             {
                 data.avg && (
                     <div>
@@ -70,14 +71,10 @@ const LabelLayout = (props: any) => {
 
 const Index = () => {
 
-    const [likelihoodAvg, setLikelihoodAvg] = useState('');
-    const [impactAvg, setImpactAvg] = useState('');
-    const [likelihoodLabel, setLikelihoodLabel] = useState('');
-    const [impactLabel, setImpactLabel] = useState('');
-    const [likelihoodLabelColor, setLikelihoodLabelColor] = useState('');
-    const [impactLabelColor, setImpactLabelColor] = useState('');
-    const [criticalityLabel, setCriticalityLabel] = useState('')
-    const [criticalityColor, setCriticalityColor] = useState('')
+    const [likelihood, setLikelihood] = useState({avg: '', label: '', color: ''});
+    const [impact, setImpact] = useState({avg: '', label: '', color: ''});
+    const [criticality, setCriticality] = useState({label: '', color: ''});
+
     const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
@@ -87,33 +84,24 @@ const Index = () => {
         // Generate Threat Vecor
         const risk = generateThreatVectorJSON(json);
         // Set vector to String
-        setVectorToString = Risk.vectorToString(risk)
-        // Likelihood Average Score
-        const likelihoodAvgScore = Risk.calculateAverage(risk.slice(0, 8));
-        setLikelihoodAvg(likelihoodAvgScore);
-         // Impact Average Score
-        const impactAvgScore = Risk.calculateAverage(risk.slice(8, 16));
-        setImpactAvg(impactAvgScore);
-         // Likelihood Label
-        const likelihoodLabelValue = Risk.rate(Number(likelihoodAvgScore));
-        setLikelihoodLabel(likelihoodLabelValue);
-         // Impact Label
-        const impactLabelValue = Risk.rate(Number(impactAvgScore));
-        setImpactLabel(impactLabelValue);
-        // Likelihood Color
-        const likelihoodLabelColorCode = Risk.colour(likelihoodLabelValue);
-        setLikelihoodLabelColor(likelihoodLabelColorCode);
-        // Impact Color
-        const impactLabelColorCode = Risk.colour(impactLabelValue);
-        setImpactLabelColor(impactLabelColorCode);
-        // Criticality Label
-        const criticality = Risk.criticality(likelihoodLabelValue, impactLabelValue)
-        setCriticalityLabel(criticality);
-        // Criticality Color
-        const CriticalityColor = Risk.colour(criticality);
-        setCriticalityColor(CriticalityColor);
+        vectorToString = Risk.vectorToString(risk)
 
-        return likelihoodAvgScore
+        // Likelihood
+        const lhAvg = Risk.calculateAverage(risk.slice(0, 8));
+        const lhLabel = Risk.rate(Number(lhAvg));
+        const lhColor = Risk.colour(lhLabel);
+        setLikelihood({avg: lhAvg, label: lhLabel, color: lhColor});
+
+        // Impact
+        const impAvg = Risk.calculateAverage(risk.slice(8, 16));
+        const impLabel = Risk.rate(Number(impAvg));
+        const impColor = Risk.colour(impLabel);
+        setImpact({avg: impAvg, label: impLabel, color: impColor});
+
+        // Criticality Label
+        const criticalityLabel = Risk.criticality(lhLabel, impLabel);
+        const criticalityColor = Risk.colour(criticalityLabel);
+        setCriticality({label: criticalityLabel, color: criticalityColor});
     }
 
     return (
@@ -174,49 +162,39 @@ const Index = () => {
                                         : ele.label === 'Likelihood' ?
                                         <LabelLayout
                                             title={ele.label}
-                                            avg={likelihoodAvg}
-                                            label={likelihoodLabel}
-                                            color={likelihoodLabelColor}
+                                            data={likelihood}
                                         />
                                         :
                                         <LabelLayout
                                             title={ele.label}
-                                            avg={impactAvg}
-                                            label={impactLabel}
-                                            color={impactLabelColor}
+                                            data={impact}
                                         />
                                     }
                                 </div>
                             </div>
                         ))
                     }
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-12 text-center">
-                                <div className="float-right" style={styleCritical}>
-                                    <h3>RISK SEVERITY</h3>
-                                    <label className="text-uppercase px-4 py-1"
-                                        style={{ backgroundColor: criticalityColor}}
-                                    >
-                                        <b>{criticalityLabel}</b>
-                                    </label>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="offset-sm-8 col-sm-4" style={{ marginTop: '-4rem'}}>
+                        <div className="text-center">
+                            <h3>RISK SEVERITY</h3>
+                            <label className="text-uppercase px-4 py-1"
+                                style={{ backgroundColor: criticality?.color}}
+                            >
+                                <b>{criticality?.label}</b>
+                            </label>
                         </div>
                     </div>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-sm-12 text-center">
-                            <label>
-                                VECTOR: 
-                                <a href="#" target="_blank" data-testid="anchorTag">
-                                    {
-                                    setVectorToString ? setVectorToString : '(SL:0/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:0/RD:0/NC:0/PV:0)'
-                                    }
-                                    </a>
-                            </label>
-                            </div>
-                        </div>
+                    <div className="col-sm-12 text-center mt-4">
+                        <label>
+                            VECTOR:
+                            <a href="#" target="_blank" data-testid="anchorTag">
+                                {vectorToString}
+                            </a>
+                        </label>
                     </div>
                 </div>
             </div>
