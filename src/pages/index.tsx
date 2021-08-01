@@ -182,9 +182,9 @@ const Index = () => {
                         <div className="text-center">
                             <h3>RISK SEVERITY</h3>
                             <label className="text-uppercase px-4 py-1"
-                                style={{ backgroundColor: criticality?.color}}
+                                style={{ backgroundColor: criticality.color}}
                             >
-                                <b>{criticality?.label}</b>
+                                <b>{criticality.label}</b>
                             </label>
                         </div>
                     </div>
