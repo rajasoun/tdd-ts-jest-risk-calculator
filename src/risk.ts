@@ -1,5 +1,5 @@
 /** Threat Vector Interface */
-interface ThreatVector {
+export interface ThreatVector {
   id: number;
   name: string;
   value: number;

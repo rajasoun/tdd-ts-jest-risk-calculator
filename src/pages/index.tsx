@@ -1,4 +1,5 @@
 import data from '../data/risk-calculator.json';
+import Risk, { ThreatVector } from '../risk'
 
 interface Option {
     name: string,
@@ -29,6 +30,12 @@ const styleSelect = {
     minWidth: 400
 }
 // Styles for element ends
+
+export const generateThreatVector = (json: ThreatVector): string => {
+    const initialVector = data.initialVector;
+    const vector = Risk.vectorToJson(initialVector);
+    return vector;
+}
 
 const Index = () => {
     return (
