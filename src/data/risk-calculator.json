@@ -1,4 +1,101 @@
 {
+    "calculationModal":[
+        {
+            "title": "How is Severity Risk Calculated?",
+            "levels": [
+                {
+                    "title": "Likelihood and Impact Levels",
+                    "score": [
+                        {
+                            "levelscore": "0 to < 3",
+                            "leveldescription": "Low",
+                            "color":  "rgba(255, 255, 0)"
+                        },
+                        {
+                            "levelscore": "3 to < 6",
+                            "leveldescription": "Medium",
+                            "color":  "rgba(255, 169, 0)"
+                        },
+                        {
+                            "levelscore": "6 to < 9",
+                            "leveldescription": "High",
+                            "color":  "rgba(255, 0, 0)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "levels": [
+                {
+                    "title": "Overall Risk Severity = Likelihood x Impact",
+                    "description": "Impact",
+                    "score": [
+                        {
+                            "levelscore": "HIGH",
+                            "leveldescription": [
+                                "Medium",
+                                "High",
+                                "Critical"
+                            ],
+                            "color": [
+                                "rgba(255, 169, 0)",
+                                "rgba(255, 0, 0)",
+                                "rgba(255, 102, 255)"
+                            ]
+                        },
+                        {
+                            "levelscore": "MEDIUM",
+                            "leveldescription": [
+                                "Low",
+                                "Medium",
+                                "High"
+                            ],
+                            "color": [
+                                "rgba(255, 255, 0)",
+                                "rgba(255, 169, 0)",
+                                "rgba(255, 0, 0)"
+                            ]
+                        },
+                        {
+                            "levelscore": "LOW",
+                            "leveldescription": [
+                                "Note",
+                                "Low",
+                                "Medium"
+                            ],
+                            "color": [
+                                "rgba(144, 238, 144)",
+                                "rgba(255, 255, 0)",
+                                "rgba(255, 169, 0)"
+                            ]
+                        },
+                        {
+                            "levelscore": "",
+                            "leveldescription": [
+                                "LOW",
+                                "MEDIUM",
+                                "HIGH"
+                            ],
+                            "color": [
+                                "rgba(255, 255, 255)",
+                                "rgba(255, 255, 255)",
+                                "rgba(255, 255, 255)"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "levels": [
+                {
+                    "title": "",
+                    "description": "Likelyhood"
+                }
+            ]
+        }
+    ],"title": "Overall Risk Severity = Likelihood x Impact",
     "initialVector": [
         {"id": 0, "name": "SL", "value": 0},
         {"id": 1, "name": "M", "value": 0},

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { string } from 'yargs';
 import data from '../data/risk-calculator.json';
 import Risk, { ThreatVector } from '../risk';
 
@@ -71,11 +70,11 @@ const LabelLayout = (props: any) => {
 
 const Index = () => {
 
-    const [likelihood, setLikelihood] = useState({avg: '', label: '', color: ''});
-    const [impact, setImpact] = useState({avg: '', label: '', color: ''});
-    const [criticality, setCriticality] = useState({label: '', color: ''});
+    const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
+    const [impact, setImpact] = useState({ avg: '', label: '', color: '' });
+    const [criticality, setCriticality] = useState({ label: '', color: '' });
 
-    const handleChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let json = {
             id: Number(event.target.id),
             name: event.target.name,
@@ -90,18 +89,18 @@ const Index = () => {
         const lhAvg = Risk.calculateAverage(risk.slice(0, 8));
         const lhLabel = Risk.rate(Number(lhAvg));
         const lhColor = Risk.colour(lhLabel);
-        setLikelihood({avg: lhAvg, label: lhLabel, color: lhColor});
+        setLikelihood({ avg: lhAvg, label: lhLabel, color: lhColor });
 
         // Impact
         const impAvg = Risk.calculateAverage(risk.slice(8, 16));
         const impLabel = Risk.rate(Number(impAvg));
         const impColor = Risk.colour(impLabel);
-        setImpact({avg: impAvg, label: impLabel, color: impColor});
+        setImpact({ avg: impAvg, label: impLabel, color: impColor });
 
         // Criticality Label
         const criticalityLabel = Risk.criticality(lhLabel, impLabel);
         const criticalityColor = Risk.colour(criticalityLabel);
-        setCriticality({label: criticalityLabel, color: criticalityColor});
+        setCriticality({ label: criticalityLabel, color: criticalityColor });
     }
 
     return (
@@ -129,7 +128,7 @@ const Index = () => {
                                         {ele.title}
                                     </div>
                                     {
-                                        !ele.label?
+                                        !ele.label ?
                                             ele.select.map((data: Select) => (
                                                 <div key={data.id}>
                                                     <div className="form-group">
@@ -147,28 +146,28 @@ const Index = () => {
                                                             {
                                                                 data.options.map(
                                                                     (option: Option, i: number) => (
-                                                                    <option
-                                                                        key={`${data.name}__${i}`}
-                                                                        value={option.value}
-                                                                    >
-                                                                        {option.name} ({option.value})
-                                                                    </option>
-                                                                ))
+                                                                        <option
+                                                                            key={`${data.name}__${i}`}
+                                                                            value={option.value}
+                                                                        >
+                                                                            {option.name} ({option.value})
+                                                                        </option>
+                                                                    ))
                                                             }
                                                         </select>
                                                     </div>
                                                 </div>
                                             ))
-                                        : ele.label === 'Likelihood' ?
-                                        <LabelLayout
-                                            title={ele.label}
-                                            data={likelihood}
-                                        />
-                                        :
-                                        <LabelLayout
-                                            title={ele.label}
-                                            data={impact}
-                                        />
+                                            : ele.label === 'Likelihood' ?
+                                                <LabelLayout
+                                                    title={ele.label}
+                                                    data={likelihood}
+                                                />
+                                                :
+                                                <LabelLayout
+                                                    title={ele.label}
+                                                    data={impact}
+                                                />
                                     }
                                 </div>
                             </div>
@@ -178,11 +177,11 @@ const Index = () => {
             </div>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="offset-sm-8 col-sm-4" style={{ marginTop: '-4rem'}}>
+                    <div className="offset-sm-8 col-sm-4" style={{ marginTop: '-4rem' }}>
                         <div className="text-center">
                             <h3>RISK SEVERITY</h3>
                             <label className="text-uppercase px-4 py-1"
-                                style={{ backgroundColor: criticality.color}}
+                                style={{ backgroundColor: criticality.color }}
                             >
                                 <b>{criticality.label}</b>
                             </label>
@@ -195,6 +194,112 @@ const Index = () => {
                                 {vectorToString}
                             </a>
                         </label>
+                    </div>
+                    <div className="col-sm-12 text-center">
+                        <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop">
+                            How is Severity Risk Calculated?
+                        </a>
+                    </div>
+                    {/* Modal */}
+                    <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="staticBackdropLabel">How is Severity Risk Calculated?</h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    {
+                                        data.calculationModal.map((ele: any) => (
+                                            ele.levels.map((levels: any, i: number) => (
+                                                levels.title == "Likelihood and Impact Levels" ? (
+                                                    <table key={i} className="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th colSpan={2}>
+                                                                    {levels.title}
+                                                                </th>
+                                                            </tr>
+                                                            {
+                                                                levels.score.map((score: any, index: number) => (
+                                                                    <tr key={index}>
+                                                                        <td>
+                                                                            {score.levelscore}
+                                                                        </td>
+                                                                        <td style={
+                                                                            {
+                                                                                backgroundColor: score.color,
+                                                                                color: score.color == "rgba(255, 0, 0)" ? "white" : ''
+
+                                                                            }
+                                                                        }>
+                                                                            {score.leveldescription}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                                )
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                ) : levels.title == "Overall Risk Severity = Likelihood x Impact" ? (
+                                                    <table className="table table-bordered" key={i}>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th colSpan={3}>
+                                                                    {levels.title}
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style={{ paddingTop: "4rem", paddingRight: "3rem" }}>
+                                                                    <b>{levels.description}</b>
+                                                                </td>
+                                                                {
+                                                                    levels.score.map((ele: any, scoreIndex: number) => (
+                                                                        <tr key={scoreIndex}>
+                                                                            <td key={scoreIndex}>
+                                                                                {ele.levelscore}
+                                                                            </td>
+                                                                            {
+                                                                                ele.leveldescription.map((leveldes: any, levelIdex: number) => (
+                                                                                    <td key={levelIdex} style={
+                                                                                        {
+                                                                                            backgroundColor: ele.color[levelIdex],
+                                                                                            color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : ''
+
+                                                                                        }
+                                                                                    }>
+                                                                                        {leveldes}
+                                                                                    </td>
+                                                                                ))
+                                                                            }
+                                                                        </tr>
+                                                                    ))
+                                                                }
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                ) :
+                                                    <table className="table table-bordered" style={{ marginTop: "-16px" }} key={i}>
+                                                       <tfoot>
+                                                       <tr>
+                                                            <td style={{ paddingRight: "1.3rem" }}></td>
+                                                            <td colSpan={3}><b>{ levels.description}</b></td>
+                                                        </tr>
+                                                       </tfoot>
+                                                    </table>
+
+                                            )
+                                            )
+                                        )
+                                        )
+                                    }
+                                </div>
+                                <div className="modal-footer">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
