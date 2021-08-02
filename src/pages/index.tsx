@@ -244,7 +244,7 @@ const Index = () => {
                                                         </tbody>
                                                     </table>
                                                 ) : levels.title == "Overall Risk Severity = Likelihood x Impact" ? (
-                                                    <table className="table table-bordered" key={i}>
+                                                    <table className="table table-bordered" key={i} style={{borderBottom: 'hidden'}}>
                                                         <tbody>
                                                             <tr>
                                                                 <th colSpan={3}>
@@ -252,13 +252,13 @@ const Index = () => {
                                                                 </th>
                                                             </tr>
                                                             <tr>
-                                                                <td style={{ paddingTop: "4rem" }}>
+                                                                <td style={{ verticalAlign: 'middle' }}>
                                                                     <b>{levels.description}</b>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{margin: '0', padding: '0'}}>
                                                                     {
                                                                         levels.score.map((ele: any, scoreIndex: number) => (
-                                                                            <table key={scoreIndex} style={{width: "104%"}}>
+                                                                            <table key={scoreIndex} style={{width: "100%"}}>
                                                                                 <tbody>
                                                                                     <tr key={scoreIndex}>
                                                                                         <td key={scoreIndex} style={{width: '25%'}}>
@@ -270,7 +270,7 @@ const Index = () => {
                                                                                                     {
                                                                                                         backgroundColor: ele.color[levelIdex],
                                                                                                         color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : '',
-                                                                                                        width: '25%'
+                                                                                                        width: '25% '
 
                                                                                                     }
                                                                                                 }>
@@ -291,19 +291,16 @@ const Index = () => {
                                                     <table className="table table-bordered" style={{ marginTop: "-16px" }} key={i}>
                                                         <tfoot>
                                                             <tr>
-                                                                <td></td>
-                                                                <td colSpan={3}><b>{levels.description}</b></td>
+                                                                <td style={{paddingRight: '0.9rem'}}></td>
+                                                                <td colSpan={4}><b>{levels.description}</b></td>
                                                             </tr>
                                                         </tfoot>
                                                     </table>
-
-                                            )
+                                                )
                                             )
                                         )
                                         )
                                     }
-                                </div>
-                                <div className="modal-footer">
                                 </div>
                             </div>
                         </div>
