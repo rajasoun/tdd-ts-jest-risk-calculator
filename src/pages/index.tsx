@@ -252,42 +252,48 @@ const Index = () => {
                                                                 </th>
                                                             </tr>
                                                             <tr>
-                                                                <td style={{ paddingTop: "4rem", paddingRight: "3rem" }}>
+                                                                <td style={{ paddingTop: "4rem" }}>
                                                                     <b>{levels.description}</b>
                                                                 </td>
-                                                                {
-                                                                    levels.score.map((ele: any, scoreIndex: number) => (
-                                                                        <tr key={scoreIndex}>
-                                                                            <td key={scoreIndex}>
-                                                                                {ele.levelscore}
-                                                                            </td>
-                                                                            {
-                                                                                ele.leveldescription.map((leveldes: any, levelIdex: number) => (
-                                                                                    <td key={levelIdex} style={
+                                                                <td>
+                                                                    {
+                                                                        levels.score.map((ele: any, scoreIndex: number) => (
+                                                                            <table key={scoreIndex} style={{width: "104%"}}>
+                                                                                <tbody>
+                                                                                    <tr key={scoreIndex}>
+                                                                                        <td key={scoreIndex} style={{width: '25%'}}>
+                                                                                            {ele.levelscore}
+                                                                                        </td>
                                                                                         {
-                                                                                            backgroundColor: ele.color[levelIdex],
-                                                                                            color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : ''
+                                                                                            ele.leveldescription.map((leveldes: any, levelIdex: number) => (
+                                                                                                <td key={levelIdex} style={
+                                                                                                    {
+                                                                                                        backgroundColor: ele.color[levelIdex],
+                                                                                                        color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : ''
 
+                                                                                                    }
+                                                                                                }>
+                                                                                                    {leveldes}
+                                                                                                </td>
+                                                                                            ))
                                                                                         }
-                                                                                    }>
-                                                                                        {leveldes}
-                                                                                    </td>
-                                                                                ))
-                                                                            }
-                                                                        </tr>
-                                                                    ))
-                                                                }
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        ))
+                                                                    }
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 ) :
                                                     <table className="table table-bordered" style={{ marginTop: "-16px" }} key={i}>
-                                                       <tfoot>
-                                                       <tr>
-                                                            <td style={{ paddingRight: "1.3rem" }}></td>
-                                                            <td colSpan={3}><b>{ levels.description}</b></td>
-                                                        </tr>
-                                                       </tfoot>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td colSpan={3}><b>{levels.description}</b></td>
+                                                            </tr>
+                                                        </tfoot>
                                                     </table>
 
                                             )
