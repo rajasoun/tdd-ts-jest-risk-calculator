@@ -335,46 +335,22 @@ the factors that are more significant for the specific business. This makes the 
 the evaluator needs to use a weighted average. But otherwise everything works the same. Again it is possible to
 tune the model by matching it against risk ratings the business agrees are accurate.
 
-### TypeScript Next.js
+### Pre-requesties
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+`node v12.x` above and `npm`. Download it from here if you do not have one [Node](https://nodejs.org/en/download/)
 
-## Getting Started
-Create a new folder and Install the required dependencies from your terminal:
+### Install Dependencies
 
-```bash
-npx create-next-app --ts
-# or
-yarn create next-app --typescript
-```
+`npm install`
 
-### Install required @types module
+### Development Execution
 
-@types/ prefix means that we also want to get the declaration files for React and React-DOM. Usually when you import a path like “react”, it will look inside of the react package itself; however, not all packages include declaration files, so TypeScript also looks in the @types/react package as well.
+`npm run dev` will start up the server. Head over to `http://localhost:3000` and you should see the aplication up and running
 
-```bash
-npm install --save-dev @types/react @types/react-dom @types/node
-# or
-yarn add --save-dev @types/react @types/react-dom @types/node
-```
+### Production
 
+`npm run build` will generate optimized version of the application.
 
-Next, run the development server:
+`npm run start` will serve the optimized build version of the application. *Note: This does not export the optimised files for stand alone serving. This requires to be part of the next application only*
 
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npm run export` will build the application and export the build to `out` directory which can be used for standalone purpose.
