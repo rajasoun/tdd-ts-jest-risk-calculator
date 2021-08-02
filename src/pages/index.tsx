@@ -68,6 +68,81 @@ const LabelLayout = (props: any) => {
     )
 }
 
+const LevelsTable = (props: any) => {
+    return (
+        <table className="table table-bordered">
+            <tbody>
+                <tr><th colSpan={2}>Likelihood and Impact Levels</th></tr>
+                {
+                    props.data.map((ele: any, index: number) => (
+                        <tr key={index}>
+                            <td>{ele.range}</td>
+                            <td style={{
+                                backgroundColor: ele.color,
+                                color: ele.color == "rgba(255, 0, 0)" ? "white" : ''
+                            }}>
+                                {ele.label}
+                            </td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    )
+}
+
+const RiskSeverityTable = (props: any) => {
+    return (
+        <table className="table table-bordered">
+            <tbody>
+                <tr><th colSpan={5}>Overall Risk Severity = Likelihood x Impact</th></tr>
+                <tr>
+                    <td rowSpan={5} className="align-middle"><b>Impact</b></td>
+                </tr>
+                {props.data.map((ele: any, i: number) => (
+                    <tr key={i}>
+                    <td>{ele.mainLabel}</td>
+                    {ele.lblAndColor.map((e: any, index: number) => (
+                        <td
+                            key={index}
+                            style={{
+                                backgroundColor: e.color,
+                                color: e.color == "rgba(255, 0, 0)" ? "white" : '',
+                                width: '25%'
+                            }}
+                        >{e.label}</td>
+                    ))}
+                    </tr>
+                ))}
+                <tr>
+                    <td></td>
+                    <td colSpan={4}><b>Likelihood</b></td>
+                </tr>
+            </tbody>
+        </table>
+    )
+}
+
+const Modal = () => {
+    return (
+        <div className="modal fade" id="staticBackdrop" data-backdrop="static">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">How is Severity Risk Calculated?</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <LevelsTable data={data.lhAndImpLevel} />
+                        <RiskSeverityTable data={data.overAllRiskSeverity} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 const Index = () => {
 
     const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
@@ -112,7 +187,7 @@ const Index = () => {
                 Risk Assessment Calculator
             </h1>
             <hr />
-            <div className="container-fluid">
+            <div className="container-fluid px-5">
                 <div className="row">
                     {
                         data.data.map((ele: any, index: number) => (
@@ -128,46 +203,41 @@ const Index = () => {
                                         {ele.title}
                                     </div>
                                     {
-                                        !ele.label ?
-                                            ele.select.map((data: Select) => (
-                                                <div key={data.id}>
-                                                    <div className="form-group">
-                                                        <label style={styleSelectLabel}>
-                                                            {data.description}
-                                                        </label>
-                                                        <select
-                                                            data-testid={data.id}
-                                                            id={String(data.id)}
-                                                            name={data.name}
-                                                            className="form-control"
-                                                            style={styleSelect}
-                                                            onChange={handleChange}
-                                                        >
-                                                            {
-                                                                data.options.map(
-                                                                    (option: Option, i: number) => (
-                                                                        <option
-                                                                            key={`${data.name}__${i}`}
-                                                                            value={option.value}
-                                                                        >
-                                                                            {option.name} ({option.value})
-                                                                        </option>
-                                                                    ))
-                                                            }
-                                                        </select>
-                                                    </div>
+                                        !ele.label ? ele.select.map((data: Select) => (
+                                            <div key={data.id}>
+                                                <div className="form-group">
+                                                    <label style={styleSelectLabel}>
+                                                        {data.description}
+                                                    </label>
+                                                    <select
+                                                        data-testid={data.id}
+                                                        id={String(data.id)}
+                                                        name={data.name}
+                                                        className="form-control"
+                                                        style={styleSelect}
+                                                        onChange={handleChange}
+                                                    >
+                                                        {data.options.map(
+                                                        (option: Option, i: number) => (
+                                                            <option
+                                                                key={`${data.name}__${i}`}
+                                                                value={option.value}
+                                                            >
+                                                                {option.name} ({option.value})
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                 </div>
-                                            ))
-                                            : ele.label === 'Likelihood' ?
-                                                <LabelLayout
-                                                    title={ele.label}
-                                                    data={likelihood}
-                                                />
-                                                :
-                                                <LabelLayout
-                                                    title={ele.label}
-                                                    data={impact}
-                                                />
+                                            </div>
+                                        )): ele.label === 'Likelihood' ?
+                                        <LabelLayout
+                                            title={ele.label}
+                                            data={likelihood}
+                                        />:
+                                        <LabelLayout
+                                            title={ele.label}
+                                            data={impact}
+                                        />
                                     }
                                 </div>
                             </div>
@@ -187,7 +257,7 @@ const Index = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="col-sm-12 text-center mt-4">
+                    <div className="col-sm-12 text-center mt-5">
                         <label>
                             VECTOR:
                             <a href="#" target="_blank" data-testid="anchorTag">
@@ -195,119 +265,12 @@ const Index = () => {
                             </a>
                         </label>
                     </div>
-                    <div className="col-sm-12 text-center">
+                    <div className="col-sm-12 text-center mb-5">
                         <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop">
                             How is Severity Risk Calculated?
                         </a>
                     </div>
-                    {/* Modal */}
-                    <div className="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="staticBackdropLabel">How is Severity Risk Calculated?</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div className="modal-body">
-                                    {
-                                        data.calculationModal.map((ele: any) => (
-                                            ele.levels.map((levels: any, i: number) => (
-                                                levels.title == "Likelihood and Impact Levels" ? (
-                                                    <table key={i} className="table table-bordered">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th colSpan={2}>
-                                                                    {levels.title}
-                                                                </th>
-                                                            </tr>
-                                                            {
-                                                                levels.score.map((score: any, index: number) => (
-                                                                    <tr key={index}>
-                                                                        <td>
-                                                                            {score.levelscore}
-                                                                        </td>
-                                                                        <td style={
-                                                                            {
-                                                                                backgroundColor: score.color,
-                                                                                color: score.color == "rgba(255, 0, 0)" ? "white" : ''
-
-                                                                            }
-                                                                        }>
-                                                                            {score.leveldescription}
-                                                                        </td>
-                                                                    </tr>
-                                                                )
-                                                                )
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                ) : levels.title == "Overall Risk Severity = Likelihood x Impact" ? (
-                                                    <table className="table table-bordered" key={i}>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th colSpan={3}>
-                                                                    {levels.title}
-                                                                </th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style={{ paddingTop: "4rem" }}>
-                                                                    <b>{levels.description}</b>
-                                                                </td>
-                                                                <td>
-                                                                    {
-                                                                        levels.score.map((ele: any, scoreIndex: number) => (
-                                                                            <table key={scoreIndex} style={{width: "104%"}}>
-                                                                                <tbody>
-                                                                                    <tr key={scoreIndex}>
-                                                                                        <td key={scoreIndex} style={{width: '25%'}}>
-                                                                                            {ele.levelscore}
-                                                                                        </td>
-                                                                                        {
-                                                                                            ele.leveldescription.map((leveldes: any, levelIdex: number) => (
-                                                                                                <td key={levelIdex} style={
-                                                                                                    {
-                                                                                                        backgroundColor: ele.color[levelIdex],
-                                                                                                        color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : '',
-                                                                                                        width: '25%'
-
-                                                                                                    }
-                                                                                                }>
-                                                                                                    {leveldes}
-                                                                                                </td>
-                                                                                            ))
-                                                                                        }
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        ))
-                                                                    }
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                ) :
-                                                    <table className="table table-bordered" style={{ marginTop: "-16px" }} key={i}>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td colSpan={3}><b>{levels.description}</b></td>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
-
-                                            )
-                                            )
-                                        )
-                                        )
-                                    }
-                                </div>
-                                <div className="modal-footer">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Modal />
                 </div>
             </div>
         </>

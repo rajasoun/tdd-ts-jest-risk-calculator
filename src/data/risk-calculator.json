@@ -1,101 +1,55 @@
 {
-    "calculationModal":[
+    "lhAndImpLevel":[
         {
-            "title": "How is Severity Risk Calculated?",
-            "levels": [
-                {
-                    "title": "Likelihood and Impact Levels",
-                    "score": [
-                        {
-                            "levelscore": "0 to < 3",
-                            "leveldescription": "Low",
-                            "color":  "rgba(255, 255, 0)"
-                        },
-                        {
-                            "levelscore": "3 to < 6",
-                            "leveldescription": "Medium",
-                            "color":  "rgba(255, 169, 0)"
-                        },
-                        {
-                            "levelscore": "6 to < 9",
-                            "leveldescription": "High",
-                            "color":  "rgba(255, 0, 0)"
-                        }
-                    ]
-                }
+            "range": "0 to < 3",
+            "label": "Low",
+            "color":  "rgba(255, 255, 0)"
+        },
+        {
+            "range": "3 to < 6",
+            "label": "Medium",
+            "color":  "rgba(255, 169, 0)"
+        },
+        {
+            "range": "6 to < 9",
+            "label": "High",
+            "color":  "rgba(255, 0, 0)"
+        }
+    ],
+    "overAllRiskSeverity": [
+        {
+            "mainLabel": "HIGH",
+            "lblAndColor": [
+                {"label": "Medium", "color": "rgba(255, 169, 0)"},
+                {"label": "High", "color": "rgba(255, 0, 0)"},
+                {"label": "Critical", "color": "rgba(255, 102, 255)"}
             ]
         },
         {
-            "levels": [
-                {
-                    "title": "Overall Risk Severity = Likelihood x Impact",
-                    "description": "Impact",
-                    "score": [
-                        {
-                            "levelscore": "HIGH",
-                            "leveldescription": [
-                                "Medium",
-                                "High",
-                                "Critical"
-                            ],
-                            "color": [
-                                "rgba(255, 169, 0)",
-                                "rgba(255, 0, 0)",
-                                "rgba(255, 102, 255)"
-                            ]
-                        },
-                        {
-                            "levelscore": "MEDIUM",
-                            "leveldescription": [
-                                "Low",
-                                "Medium",
-                                "High"
-                            ],
-                            "color": [
-                                "rgba(255, 255, 0)",
-                                "rgba(255, 169, 0)",
-                                "rgba(255, 0, 0)"
-                            ]
-                        },
-                        {
-                            "levelscore": "LOW",
-                            "leveldescription": [
-                                "Note",
-                                "Low",
-                                "Medium"
-                            ],
-                            "color": [
-                                "rgba(144, 238, 144)",
-                                "rgba(255, 255, 0)",
-                                "rgba(255, 169, 0)"
-                            ]
-                        },
-                        {
-                            "levelscore": "",
-                            "leveldescription": [
-                                "LOW",
-                                "MEDIUM",
-                                "HIGH"
-                            ],
-                            "color": [
-                                "rgba(255, 255, 255)",
-                                "rgba(255, 255, 255)",
-                                "rgba(255, 255, 255)"
-                            ]
-                        }
-                    ]
-                }
+            "mainLabel": "MEDIUM",
+            "lblAndColor": [
+                {"label": "Low", "color": "rgba(255, 255, 0)"},
+                {"label": "Medium", "color": "rgba(255, 169, 0)"},
+                {"label": "High", "color": "rgba(255, 0, 0)"}
             ]
         },
         {
-            "levels": [
-                {
-                    "title": "",
-                    "description": "Likelyhood"
-                }
+            "mainLabel": "LOW",
+            "lblAndColor": [
+                {"label": "Note", "color": "rgba(144, 238, 144)"},
+                {"label": "Low", "color": "rgba(255, 255, 0)"},
+                {"label": "Medium", "color": "rgba(255, 169, 0)"}
+            ]
+        },
+        {
+            "mainLabel": "",
+            "lblAndColor": [
+                {"label": "LOW", "color": "rgba(255, 255, 255)"},
+                {"label": "MEDIUM", "color": "rgba(255, 255, 255)"},
+                {"label": "HIGH", "color": "rgba(255, 255, 255)"}
             ]
         }
-    ],"title": "Overall Risk Severity = Likelihood x Impact",
+    ],
     "initialVector": [
         {"id": 0, "name": "SL", "value": 0},
         {"id": 1, "name": "M", "value": 0},
