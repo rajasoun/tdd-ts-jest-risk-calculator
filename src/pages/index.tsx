@@ -269,7 +269,8 @@ const Index = () => {
                                                                                                 <td key={levelIdex} style={
                                                                                                     {
                                                                                                         backgroundColor: ele.color[levelIdex],
-                                                                                                        color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : ''
+                                                                                                        color: ele.color[levelIdex] == "rgba(255, 0, 0)" ? "white" : '',
+                                                                                                        width: '25%'
 
                                                                                                     }
                                                                                                 }>
