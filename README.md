@@ -2,20 +2,20 @@
 
 [Adopted from OWASP](https://github.com/OWASP/www-community)
 
-Having a systematic approach for rating risks will save time and eliminate arguing about priorities. 
+Having a systematic approach for rating risks will save time and eliminate arguing about priorities.
 Risk assessment calcuator will help to ensure that the business doesn't get distracted by minor risks while ignoring more serious risks that are less well understood.
 
 
 ## Approach
 
-The OWASP approach presented here is based on these standard methodologies and is 
+The OWASP approach presented here is based on these standard methodologies and is
 customized for application security.
 
 Let's start with the standard risk model:
 
   - **Risk = Likelihood * Impact**
 
-In the sections below, the factors that make up "likelihood" and "impact" for application security are 
+In the sections below, the factors that make up "likelihood" and "impact" for application security are
 broken down. The evaluator is shown how to combine them to determine the overall severity for the risk.
 
 ```
@@ -29,35 +29,35 @@ broken down. The evaluator is shown how to combine them to determine the overall
 
 ### Step 1: Identifying a Risk
 
-The first step is to identify a security risk that needs to be rated. The evaluator or team  needs to gather 
+The first step is to identify a security risk that needs to be rated. The evaluator or team  needs to gather
 information about the threat agent involved, the attack that will be used, the vulnerability
-involved, and the impact of a successful exploit on the business. 
+involved, and the impact of a successful exploit on the business.
 
 It's best to err on the side of caution by using the worst-case option, as that will result in the highest overall risk.
 
 ### Step 2: Factors for Estimating Likelihood
 
-Once the evaluator has identified a potential risk and wants to figure out how serious it is, the first 
-step is to estimate the "likelihood". At the highest level, this is a rough measure of how likely this 
-particular vulnerability is to be uncovered and exploited by an attacker. It is not necessary to be 
-over-precise in this estimate. Generally, identifying whether the likelihood is low, medium, or high 
+Once the evaluator has identified a potential risk and wants to figure out how serious it is, the first
+step is to estimate the "likelihood". At the highest level, this is a rough measure of how likely this
+particular vulnerability is to be uncovered and exploited by an attacker. It is not necessary to be
+over-precise in this estimate. Generally, identifying whether the likelihood is low, medium, or high
 is sufficient.
 
-There are a number of factors that can help determine the likelihood. The first set of factors are 
-related to the threat agent involved. The goal is to estimate the likelihood of a successful attack 
-from a group of possible attackers. Note that there may be multiple threat agents that can exploit a 
-particular vulnerability, so it's usually best to use the worst-case scenario. For example, an insider 
+There are a number of factors that can help determine the likelihood. The first set of factors are
+related to the threat agent involved. The goal is to estimate the likelihood of a successful attack
+from a group of possible attackers. Note that there may be multiple threat agents that can exploit a
+particular vulnerability, so it's usually best to use the worst-case scenario. For example, an insider
 may be a much more likely attacker than an anonymous outsider, but it depends on a number of factors.
 
-Note that each factor has a set of options, and each option has a likelihood rating from 0 to 9 
+Note that each factor has a set of options, and each option has a likelihood rating from 0 to 9
 associated with it. These numbers will be used later to estimate the overall likelihood.
 
 #### Threat Agent Factors
 
-The first set of factors are related to the threat agent involved. The goal here is to estimate 
+The first set of factors are related to the threat agent involved. The goal here is to estimate
 the likelihood of a successful attack by this group of threat agents. Use the worst-case threat agent.
 
-  - **Skill Level** - How technically skilled is this group of threat agents? No technical skills (1), some technical skills (3), advanced computer user (5), network and programming skills (6), security penetration skills (9), 
+  - **Skill Level** - How technically skilled is this group of threat agents? No technical skills (1), some technical skills (3), advanced computer user (5), network and programming skills (6), security penetration skills (9),
 
   - **Motive** - How motivated is this group of threat agents to find and exploit this vulnerability? Low or no reward (1), possible reward (4), high reward (9)
 
@@ -67,8 +67,8 @@ the likelihood of a successful attack by this group of threat agents. Use the wo
 
 #### Vulnerability Factors
 
-The next set of factors are related to the vulnerability involved. The goal here is to estimate the 
-likelihood of the particular vulnerability involved being discovered and exploited. Assume the threat 
+The next set of factors are related to the vulnerability involved. The goal here is to estimate the
+likelihood of the particular vulnerability involved being discovered and exploited. Assume the threat
 agent selected above.
 
   - **Ease of Discovery** - How easy is it for this group of threat agents to discover this vulnerability? Practically impossible (1), difficult (3), easy (7), automated tools available (9)
@@ -81,22 +81,22 @@ agent selected above.
 
 ### Step 3: Factors for Estimating Impact
 
-When considering the impact of a successful attack, it's important to realize that there are 
-two kinds of impacts. The first is the "technical impact" on the application, the data it uses, 
-and the functions it provides.  The other is the "business impact" on the business and company 
+When considering the impact of a successful attack, it's important to realize that there are
+two kinds of impacts. The first is the "technical impact" on the application, the data it uses,
+and the functions it provides.  The other is the "business impact" on the business and company
 operating the application.
 
-Ultimately, the business impact is more important. However, you may not have access to all the 
-information required to figure out the business consequences of a successful exploit. In this 
-case, providing as much detail about the technical risk will enable the appropriate business 
+Ultimately, the business impact is more important. However, you may not have access to all the
+information required to figure out the business consequences of a successful exploit. In this
+case, providing as much detail about the technical risk will enable the appropriate business
 representative to make a decision about the business risk.
 
 Again, each factor has a set of options, and each option has an impact rating from 0 to 9 associated with it. We'll use these numbers later to estimate the overall impact.
 
 #### Technical Impact Factors
 
-Technical impact can be broken down into factors aligned with the traditional security areas 
-of concern: confidentiality, integrity, availability, and accountability. The goal is to estimate 
+Technical impact can be broken down into factors aligned with the traditional security areas
+of concern: confidentiality, integrity, availability, and accountability. The goal is to estimate
 the magnitude of the impact on the system if the vulnerability were to be exploited.
 
   - **Loss of Confidentiality** - How much data could be disclosed and how sensitive is it? Minimal non-sensitive data disclosed (2), minimal critical data disclosed (6), extensive non-sensitive data disclosed (6), extensive critical data disclosed (7), all data disclosed (9)
@@ -109,17 +109,17 @@ the magnitude of the impact on the system if the vulnerability were to be exploi
 
 #### Business Impact Factors
 
-The business impact stems from the technical impact, but requires a deep understanding of what is 
-important to the company running the application. In general, you should be aiming to support your 
-risks with business impact, particularly if your audience is executive level. The business risk is 
+The business impact stems from the technical impact, but requires a deep understanding of what is
+important to the company running the application. In general, you should be aiming to support your
+risks with business impact, particularly if your audience is executive level. The business risk is
 what justifies investment in fixing security problems.
 
-Many companies have an asset classification guide and/or a business impact reference to help formalize 
-what is important to their business. These standards can help you focus on what's truly important for 
-security. If these aren't available, then it is necessary to talk with people who understand the 
+Many companies have an asset classification guide and/or a business impact reference to help formalize
+what is important to their business. These standards can help you focus on what's truly important for
+security. If these aren't available, then it is necessary to talk with people who understand the
 business to get their take on what's important.
 
-The factors below are common areas for many businesses, but this area is even more unique to a company 
+The factors below are common areas for many businesses, but this area is even more unique to a company
 than the factors related to threat agent, vulnerability, and technical impact.
 
   - **Financial damage** - How much financial damage will result from an exploit? Less than the cost to fix the vulnerability (1), minor effect on annual profit (3), significant effect on annual profit (7), bankruptcy (9)
@@ -132,8 +132,8 @@ than the factors related to threat agent, vulnerability, and technical impact.
 
 ### Step 4: Determining the Severity of the Risk
 
-In this step, the likelihood estimate and the impact estimate are put together to calculate an overall 
-severity for this risk.  This is done by figuring out whether the likelihood is low, medium, or high 
+In this step, the likelihood estimate and the impact estimate are put together to calculate an overall
+severity for this risk.  This is done by figuring out whether the likelihood is low, medium, or high
 and then do the same for impact. The 0 to 9 scale is split into three parts:
 
 <table width="40%" cellspacing="0" cellpadding="5" border="1" align="center">
@@ -156,20 +156,20 @@ and then do the same for impact. The 0 to 9 scale is split into three parts:
 
 #### Informal Method
 
-In many environments, there is nothing wrong with reviewing the factors and simply capturing the answers. 
-The evaluator should think through the factors and identify the key "driving" factors that are controlling 
-the result. The evaluator may discover that their initial impression was wrong by considering aspects of the 
+In many environments, there is nothing wrong with reviewing the factors and simply capturing the answers.
+The evaluator should think through the factors and identify the key "driving" factors that are controlling
+the result. The evaluator may discover that their initial impression was wrong by considering aspects of the
 risk that weren't obvious.
 
 #### Repeatable Method
 
-If it is necessary to defend the ratings or make them repeatable, then it is necessary to go through a 
-more formal process of rating the factors and calculating the result. Remember that there is quite a 
-lot of uncertainty in these estimates and that these factors are intended to help the evaluator arrive 
-at a sensible result. This process can be supported by automated tools to make the calculation easier. 
+If it is necessary to defend the ratings or make them repeatable, then it is necessary to go through a
+more formal process of rating the factors and calculating the result. Remember that there is quite a
+lot of uncertainty in these estimates and that these factors are intended to help the evaluator arrive
+at a sensible result. This process can be supported by automated tools to make the calculation easier.
 
-The first step is to select one of the options associated with each factor and enter the associated 
-number in the table. Then simply take the average of the scores to calculate the overall likelihood. 
+The first step is to select one of the options associated with each factor and enter the associated
+number in the table. Then simply take the average of the scores to calculate the overall likelihood.
 For example:
 
 <table cellspacing="0" cellpadding="5" border="1" align="center">
@@ -205,9 +205,9 @@ For example:
 </tr>
 </table>
 <br/>
-Next, the evaluator needs to figure out the overall impact. The process is similar here. In many cases the 
-answer will be obvious, but the evaluator can make an estimate based on the factors, or they can average 
-the scores for each of the factors. Again, less than 3 is low, 3 to less than 6 is medium, and 6 to 9 
+Next, the evaluator needs to figure out the overall impact. The process is similar here. In many cases the
+answer will be obvious, but the evaluator can make an estimate based on the factors, or they can average
+the scores for each of the factors. Again, less than 3 is low, 3 to less than 6 is medium, and 6 to 9
 is high.  For example:
 
 <table cellspacing="0" cellpadding="5" border="1" align="center">
@@ -248,9 +248,9 @@ is high.  For example:
 
 #### Determining Severity
 
-However the evaluator arrives at the likelihood and impact estimates, they can now combine them to get 
-a final severity rating for this risk. Note that if they have good business impact information, they 
-should use that instead of the technical impact information.  But if they have no information about 
+However the evaluator arrives at the likelihood and impact estimates, they can now combine them to get
+a final severity rating for this risk. Note that if they have good business impact information, they
+should use that instead of the technical impact information.  But if they have no information about
 the business, then technical impact is the next best thing.
 
 <table cellspacing="0" cellpadding="5" border="1" align="center">
@@ -288,49 +288,69 @@ the business, then technical impact is the next best thing.
 </tr>
 </table>
 <br/>
-In the example above, the likelihood is medium and the technical impact is high, so from a purely 
-technical perspective it appears that the overall severity is high.  However, note that the business 
-impact is actually low, so the overall severity is best described as low as well. This is why 
-understanding the business context of the vulnerabilities you are evaluating is so critical to making 
-good risk decisions. Failure to understand this context can lead to the lack of trust between the 
+In the example above, the likelihood is medium and the technical impact is high, so from a purely
+technical perspective it appears that the overall severity is high.  However, note that the business
+impact is actually low, so the overall severity is best described as low as well. This is why
+understanding the business context of the vulnerabilities you are evaluating is so critical to making
+good risk decisions. Failure to understand this context can lead to the lack of trust between the
 business and security teams that is present in many organizations.
 
 ### Step 5: Deciding What to Fix
 
-After the risks to the application have been classified, there will be a prioritized list of what to 
-fix. As a general rule, the most severe risks should be fixed first. It simply doesn't help the overall 
+After the risks to the application have been classified, there will be a prioritized list of what to
+fix. As a general rule, the most severe risks should be fixed first. It simply doesn't help the overall
 risk profile to fix less important risks, even if they're easy or cheap to fix.
 
-Remember that not all risks are worth fixing, and some loss is not only expected, but justifiable based 
-upon the cost of fixing the issue. For example, if it would cost $100,000 to implement controls to stem 
-$2,000 of fraud per year, it would take 50 years return on investment to stamp out the loss. But 
+Remember that not all risks are worth fixing, and some loss is not only expected, but justifiable based
+upon the cost of fixing the issue. For example, if it would cost $100,000 to implement controls to stem
+$2,000 of fraud per year, it would take 50 years return on investment to stamp out the loss. But
 remember there may be reputation damage from the fraud that could cost the organization much more.
 
 ### Step 6: Customizing the Risk Rating Model
 
-Having a risk ranking framework that is customizable for a business is critical for adoption.  A tailored 
-model is much more likely to produce results that match people's perceptions about what is a serious risk. 
-A lot of time can be wasted arguing about the risk ratings if they are not supported by a model like this. 
+Having a risk ranking framework that is customizable for a business is critical for adoption.  A tailored
+model is much more likely to produce results that match people's perceptions about what is a serious risk.
+A lot of time can be wasted arguing about the risk ratings if they are not supported by a model like this.
 There are several ways to tailor this model for the organization.
 
 #### Adding factors
 
-The evaluator can choose different factors that better represent what's important for the specific organization. 
-For example, a military application might add impact factors related to loss of human life or classified 
-information. The evaluator might also add likelihood factors, such as the window of opportunity for an attacker 
+The evaluator can choose different factors that better represent what's important for the specific organization.
+For example, a military application might add impact factors related to loss of human life or classified
+information. The evaluator might also add likelihood factors, such as the window of opportunity for an attacker
 or encryption algorithm strength.
 
 #### Customizing options
 
-There are some sample options associated with each factor, but the model will be much more effective if the 
-evaluator customizes these options to the business. For example, use the names of the different teams and the 
-company names for different classifications of information. The evaluator can also change the scores associated 
-with the options. The best way to identify the right scores is to compare the ratings produced by the model 
+There are some sample options associated with each factor, but the model will be much more effective if the
+evaluator customizes these options to the business. For example, use the names of the different teams and the
+company names for different classifications of information. The evaluator can also change the scores associated
+with the options. The best way to identify the right scores is to compare the ratings produced by the model
 with ratings produced by a team of experts. You can tune the model by carefully adjusting the scores to match.
 
 #### Weighting factors
 
-The model above assumes that all the factors are equally important. You can weight the factors to emphasize 
-the factors that are more significant for the specific business. This makes the model a bit more complex, as 
-the evaluator needs to use a weighted average. But otherwise everything works the same. Again it is possible to 
+The model above assumes that all the factors are equally important. You can weight the factors to emphasize
+the factors that are more significant for the specific business. This makes the model a bit more complex, as
+the evaluator needs to use a weighted average. But otherwise everything works the same. Again it is possible to
 tune the model by matching it against risk ratings the business agrees are accurate.
+
+### Pre-requesties
+
+`node v12.x` above and `npm`. Download it from here if you do not have one [Node](https://nodejs.org/en/download/)
+
+### Install Dependencies
+
+`npm install`
+
+### Development Execution
+
+`npm run dev` will start up the server. Head over to `http://localhost:3000` and you should see the aplication up and running
+
+### Production
+
+`npm run build` will generate optimized version of the application.
+
+`npm run start` will serve the optimized build version of the application. *Note: This does not export the optimised files for stand alone serving. This requires to be part of the next application only*
+
+`npm run export` will build the application and export the build to `out` directory which can be used for standalone purpose.

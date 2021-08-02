@@ -1,0 +1,556 @@
+{
+    "lhAndImpLevel":[
+        {
+            "range": "0 to < 3",
+            "label": "Low",
+            "color":  "rgba(144, 238, 144)"
+        },
+        {
+            "range": "3 to < 6",
+            "label": "Medium",
+            "color":  "rgba(255, 169, 0)"
+        },
+        {
+            "range": "6 to < 9",
+            "label": "High",
+            "color":  "rgba(255, 0, 0)"
+        }
+    ],
+    "overAllRiskSeverity": [
+        {
+            "mainLabel": "HIGH",
+            "lblAndColor": [
+                {"label": "Medium", "color": "rgba(255, 169, 0)"},
+                {"label": "High", "color": "rgba(255, 0, 0)"},
+                {"label": "Critical", "color": "rgba(255, 102, 255)"}
+            ]
+        },
+        {
+            "mainLabel": "MEDIUM",
+            "lblAndColor": [
+                {"label": "Low", "color": "rgba(255, 255, 0)"},
+                {"label": "Medium", "color": "rgba(255, 169, 0)"},
+                {"label": "High", "color": "rgba(255, 0, 0)"}
+            ]
+        },
+        {
+            "mainLabel": "LOW",
+            "lblAndColor": [
+                {"label": "Note", "color": "rgba(144, 238, 144)"},
+                {"label": "Low", "color": "rgba(255, 255, 0)"},
+                {"label": "Medium", "color": "rgba(255, 169, 0)"}
+            ]
+        },
+        {
+            "mainLabel": "",
+            "lblAndColor": [
+                {"label": "LOW", "color": "rgba(255, 255, 255)"},
+                {"label": "MEDIUM", "color": "rgba(255, 255, 255)"},
+                {"label": "HIGH", "color": "rgba(255, 255, 255)"}
+            ]
+        }
+    ],
+    "initialVector": [
+        {"id": 0, "name": "SL", "value": 0},
+        {"id": 1, "name": "M", "value": 0},
+        {"id": 2, "name": "O", "value": 0},
+        {"id": 3, "name": "S", "value": 0},
+        {"id": 4, "name": "ED", "value": 0},
+        {"id": 5, "name": "EE", "value": 0},
+        {"id": 6, "name": "A", "value": 0},
+        {"id": 7, "name": "ID", "value": 0},
+        {"id": 8, "name": "LC", "value": 0},
+        {"id": 9, "name": "LI", "value": 0},
+        {"id": 10, "name": "LAV", "value": 0},
+        {"id": 11, "name": "LAC", "value": 0},
+        {"id": 12, "name": "FD", "value": 0},
+        {"id": 13, "name": "RD", "value": 0},
+        {"id": 14, "name": "NC", "value": 0},
+        {"id": 15, "name": "PV", "value": 0}
+    ],
+    "data": [
+        {
+            "title": "Threat Agent Factors",
+            "select": [
+                {
+                    "description": "Skill level",
+                    "name": "SL",
+                    "id": 0,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Security penetration skills",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Network and programming skills",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Advanced computer user",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Some technical skills",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "No technical skills",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Motive",
+                    "name": "M",
+                    "id": 1,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Low or no reward",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Possible reward",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "High reward",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Opportunity",
+                    "name": "O",
+                    "id": 2,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Full access or expensive resources required",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Special access or resources required",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Some access or resources required",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "No access or resources required",
+                            "value" : 9
+                        },
+                        {
+                            "name" : "No technical skills",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Size",
+                    "name": "S",
+                    "id": 3,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Developers, System administrators",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "Intranet users",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Partners",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Authenticated users",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "Anonymous Internet users",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Vulnerability Factors",
+            "select": [
+                {
+                    "description": "Ease of discovery",
+                    "name": "ED",
+                    "id": 4,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Practically impossible",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Difficult",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Easy",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Automated tools available",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Ease of exploit",
+                    "name": "EE",
+                    "id": 5,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Theoretical",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Difficult",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Easy",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Automated tools available",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Awareness",
+                    "name": "A",
+                    "id": 6,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Unknown",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Hidden",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Obvious",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "Public knowledge",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Intrusion detection",
+                    "name": "ID",
+                    "id": 7,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Developers",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "System administrators",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "Intranet users",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Partners",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Authenticated users",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "Anonymous Internet users",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Likelihood"
+        },
+        {
+            "title": "Technical Impact Factors",
+            "select": [
+                {
+                    "description": "Loss of confidentiality",
+                    "name": "LC",
+                    "id": 8,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Minimal non-sensitive data disclosed",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "minimal critical data disclosed",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "extensive non-sensitive data disclosed",
+                            "value" : 6
+                        },
+                        {
+                            "name" : "extensive critical data disclosed",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "all data disclosed",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Loss of integrity",
+                    "name": "LI",
+                    "id": 9,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Minimal slightly corrupt data",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minimal seriously corrupt data",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Extensive slightly corrupt data",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive seriously corrupt data",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "All data totally corrupt",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Loss of availability",
+                    "name": "LAV",
+                    "id": 10,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Minimal secondary services interrupted",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minimal primary services interrupted",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive secondary services interrupted",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Extensive primary services interrupted",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "All services completely lost",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Loss of accountability",
+                    "name": "LAC",
+                    "id": 11,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Fully traceable",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Possibly traceable",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Completely anonymous",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Business Impact Factors",
+            "gridSize": 5,
+            "select": [
+                {
+                    "description": "Financial damage",
+                    "name": "FD",
+                    "id": 12,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Less than the cost to fix the vulnerability",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Minor effect on annual profit",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Significant effect on annual profit",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Bankruptcy",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Reputation damage",
+                    "name": "RD",
+                    "id": 13,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Minimal damage",
+                            "value" : 1
+                        },
+                        {
+                            "name" : "Loss of major accounts",
+                            "value" : 4
+                        },
+                        {
+                            "name" : "Loss of goodwill",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Brand damage",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Non-compliance",
+                    "name": "NC",
+                    "id": 14,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "Minor violation",
+                            "value" : 2
+                        },
+                        {
+                            "name" : "Clear violation",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "High profile violation",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Total violation",
+                            "value" : 9
+                        }
+                    ]
+                },
+                {
+                    "description": "Privacy violation",
+                    "name": "PV",
+                    "id": 15,
+                    "options": [
+                        {
+                            "name" : "None",
+                            "value" : 0
+                        },
+                        {
+                            "name" : "One individual",
+                            "value" : 3
+                        },
+                        {
+                            "name" : "Hundreds of people",
+                            "value" : 5
+                        },
+                        {
+                            "name" : "Thousands of people",
+                            "value" : 7
+                        },
+                        {
+                            "name" : "Millions of people",
+                            "value" : 9
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "label": "Impact"
+        }
+    ]
+}

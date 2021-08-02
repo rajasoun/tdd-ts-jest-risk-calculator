@@ -1,0 +1,12 @@
+---
+'**/*.{html,css,js,ts,md,yaml,yml,xml}':
+    - npx prettier --write .
+
+'**/*.ts':
+    - npx tsc  --outDir "./dist"
+
+'**/*.js,**/*.ts':
+    - npx eslint --no-eslintrc --cache --fix
+
+'**/*.sh':
+    - shellcheck

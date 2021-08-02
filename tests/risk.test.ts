@@ -12,8 +12,8 @@ describe("Threat Index Risk Rating based on Risk Score", () => {
     ${9}  | ${"High"}
     ${10} | ${"undefined"}
   `("$score", ({ score, rating }) => {
-    test.concurrent(`risk rating for 
-                                    score ${score} 
+    test.concurrent(`risk rating for
+                                    score ${score}
                                     is ${rating}`, () => {
       expect(risk.rate(score)).toBe(rating);
     });
@@ -118,7 +118,7 @@ describe("Threat Index String to Vector to JSON to Vector to String", () => {
     ${T5}              | ${false}
   `("$threatVectorString", ({ threatVectorString, result }) => {
     test.concurrent(
-      `String -> Vector -> JSON -> Vector -> String 
+      `String -> Vector -> JSON -> Vector -> String
                                     for ${threatVectorString}
                                     is ${result}`, () => {
       const vector = risk.stringToVector(threatVectorString);

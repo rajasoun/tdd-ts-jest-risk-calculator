@@ -2,26 +2,29 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ develop ]
 
 jobs:
-  deploy_app:
+  Build-Test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node v14.x
+      - name: Setup Node v16.x
         uses: actions/setup-node@v1
         with:
-          node-version: '14'
+          node-version: '16'
+
+      - name: Clean Node Modules
+        run: npm run clean
 
       - name: Install dependencies
-        run: yarn install
+        run: SKIP_POST_INSTALL="yes" npm install
 
       - name: Test Application
-        run: yarn run test
+        run: npm run test
 
       # - name: Deploy Next js Application to Vercel
       #   uses: amondnet/vercel-action@v20
@@ -30,9 +33,9 @@ jobs:
       #     vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}  #Required
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} #Required 
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} #Required
       #     scope: ${{ secrets.VERCEL_TEAM_ID }}
-          
+
       # - name: Run Lighthouse
       #   uses: foo-software/lighthouse-check-action@master
       #   with:
