@@ -6,7 +6,7 @@
     "build": "next build",
     "test": "jest",
     "repl": "npx ts-node",
-    "export": "next build && next export",
+    "export": "next build && next export && mv out public",
     "dev": "next dev",
     "start": "next start",
     "postinstall": "shift-left/bin/post-install.sh"

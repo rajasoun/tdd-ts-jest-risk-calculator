@@ -18,7 +18,8 @@ interface Select {
 const styleTitle = {
     fontSize: "1.2rem",
     fontWeight: 600,
-    margin: '1rem'
+    marginLeft: '1rem',
+    marginBottom: '0.5rem'
 }
 
 const styleSelectLabel = {
@@ -31,9 +32,6 @@ const styleSelect = {
     minWidth: 400
 }
 
-const styleCritical = {
-    margin: '-6rem -12rem 0rem 0',
-}
 // Styles for element ends
 
 let initialVector = data.initialVector
@@ -50,7 +48,7 @@ export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => 
 const LabelLayout = (props: any) => {
     const data = props.data
     return (
-        <div className="text-center mt-5 pt-2">
+        <div className="text-center" style={{ margin: '30% 0 0 0' }}>
             <h3 className="text-uppercase">{props.title}</h3>
             {
                 data.avg && (
@@ -101,17 +99,17 @@ const RiskSeverityTable = (props: any) => {
                 </tr>
                 {props.data.map((ele: any, i: number) => (
                     <tr key={i}>
-                    <td>{ele.mainLabel}</td>
-                    {ele.lblAndColor.map((e: any, index: number) => (
-                        <td
-                            key={index}
-                            style={{
-                                backgroundColor: e.color,
-                                color: e.color == "rgba(255, 0, 0)" ? "white" : '',
-                                width: '25%'
-                            }}
-                        >{e.label}</td>
-                    ))}
+                        <td>{ele.mainLabel}</td>
+                        {ele.lblAndColor.map((e: any, index: number) => (
+                            <td
+                                key={index}
+                                style={{
+                                    backgroundColor: e.color,
+                                    color: e.color == "rgba(255, 0, 0)" ? "white" : '',
+                                    width: '25%'
+                                }}
+                            >{e.label}</td>
+                        ))}
                     </tr>
                 ))}
                 <tr>
@@ -182,7 +180,7 @@ const Index = () => {
         <>
             <h1
                 data-testid="header"
-                className="text-center my-3"
+                className="container mx-auto my-3"
             >
                 Risk Assessment Calculator
             </h1>
@@ -197,7 +195,7 @@ const Index = () => {
                             >
                                 <div
                                     key={`RAC_${index}`}
-                                    className="col-sm-12"
+                                    className="col-sm-12 mt-1"
                                 >
                                     <div style={styleTitle}>
                                         {ele.title}
@@ -218,26 +216,26 @@ const Index = () => {
                                                         onChange={handleChange}
                                                     >
                                                         {data.options.map(
-                                                        (option: Option, i: number) => (
-                                                            <option
-                                                                key={`${data.name}__${i}`}
-                                                                value={option.value}
-                                                            >
-                                                                {option.name} ({option.value})
-                                                            </option>
-                                                        ))}
+                                                            (option: Option, i: number) => (
+                                                                <option
+                                                                    key={`${data.name}__${i}`}
+                                                                    value={option.value}
+                                                                >
+                                                                    {option.name} ({option.value})
+                                                                </option>
+                                                            ))}
                                                     </select>
                                                 </div>
                                             </div>
-                                        )): ele.label === 'Likelihood' ?
-                                        <LabelLayout
-                                            title={ele.label}
-                                            data={likelihood}
-                                        />:
-                                        <LabelLayout
-                                            title={ele.label}
-                                            data={impact}
-                                        />
+                                        )) : ele.label === 'Likelihood' ?
+                                            <LabelLayout
+                                                title={ele.label}
+                                                data={likelihood}
+                                            /> :
+                                            <LabelLayout
+                                                title={ele.label}
+                                                data={impact}
+                                            />
                                     }
                                 </div>
                             </div>
@@ -247,17 +245,24 @@ const Index = () => {
             </div>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="offset-sm-8 col-sm-4" style={{ marginTop: '-4rem' }}>
+                    <div className="offset-sm-8 col-sm-4" style={{ position: 'absolute', top: '4%', left: '-1.5%' }}>
                         <div className="text-center">
                             <h3>RISK SEVERITY</h3>
                             <label className="text-uppercase px-4 py-1"
-                                style={{ backgroundColor: criticality.color }}
+                                style={
+                                    { 
+                                        backgroundColor: criticality.color, 
+                                        position: 'absolute', 
+                                        top: '3%', 
+                                        right: criticality.label === 'undefined'? '9%' : '16%' 
+                                    }
+                                }
                             >
                                 <b>{criticality.label}</b>
                             </label>
                         </div>
                     </div>
-                    <div className="col-sm-12 text-center mt-5">
+                    <div className="col-sm-12 text-center pt-3">
                         <label>
                             VECTOR:
                             <a href="#" target="_blank" data-testid="anchorTag">
@@ -265,8 +270,8 @@ const Index = () => {
                             </a>
                         </label>
                     </div>
-                    <div className="col-sm-12 text-center mb-5">
-                        <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop">
+                    <div className="col-sm-12 text-center" style={{ position: 'fixed', top: '9%',textAlignLast: 'end',right: '11%'}}>
+                        <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop" >
                             How is Severity Risk Calculated?
                         </a>
                     </div>
