@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import data from '../data/risk-calculator.json';
 import Risk, { ThreatVector } from '../risk';
+import Modal from '../component/risk-calculation-modal'
 
 interface Option {
     name: string,
@@ -68,81 +69,6 @@ const LabelLayout = (props: any) => {
     )
 }
 
-const LevelsTable = (props: any) => {
-    return (
-        <table className="table table-bordered">
-            <tbody>
-                <tr><th colSpan={2}>Likelihood and Impact Levels</th></tr>
-                {
-                    props.data.map((ele: any, index: number) => (
-                        <tr key={index}>
-                            <td>{ele.range}</td>
-                            <td style={{
-                                backgroundColor: ele.color,
-                                color: ele.color == "rgba(255, 0, 0)" ? "white" : ''
-                            }}>
-                                {ele.label}
-                            </td>
-                        </tr>
-                    ))
-                }
-            </tbody>
-        </table>
-    )
-}
-
-const RiskSeverityTable = (props: any) => {
-    return (
-        <table className="table table-bordered">
-            <tbody>
-                <tr><th colSpan={5}>Overall Risk Severity = Likelihood x Impact</th></tr>
-                <tr>
-                    <td rowSpan={5} className="align-middle"><b>Impact</b></td>
-                </tr>
-                {props.data.map((ele: any, i: number) => (
-                    <tr key={i}>
-                        <td>{ele.mainLabel}</td>
-                        {ele.lblAndColor.map((e: any, index: number) => (
-                            <td
-                                key={index}
-                                style={{
-                                    backgroundColor: e.color,
-                                    color: e.color == "rgba(255, 0, 0)" ? "white" : '',
-                                    width: '25%'
-                                }}
-                            >{e.label}</td>
-                        ))}
-                    </tr>
-                ))}
-                <tr>
-                    <td></td>
-                    <td colSpan={4}><b>Likelihood</b></td>
-                </tr>
-            </tbody>
-        </table>
-    )
-}
-
-const Modal = () => {
-    return (
-        <div className="modal fade" id="staticBackdrop" data-backdrop="static">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">How is Severity Risk Calculated?</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <LevelsTable data={data.lhAndImpLevel} />
-                        <RiskSeverityTable data={data.overAllRiskSeverity} />
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
 const Index = () => {
 
     const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
@@ -219,7 +145,6 @@ const Index = () => {
                     </div>
                 </div>
             </div>
-            {/* <hr style={{ marginTop: 0 }} /> */}
             <div className="container-fluid px-5" style={{ marginTop: '-3rem' }}>
                 <div className="row">
                     {
@@ -282,23 +207,6 @@ const Index = () => {
             </div>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="offset-sm-8 col-sm-4" >
-                        <div className="text-center">
-                            {/* <h3>RISK SEVERITY</h3>
-                            <label className="text-uppercase px-4 py-1"
-                                style={
-                                    {
-                                        backgroundColor: criticality.color,
-                                        position: 'absolute',
-                                        top: '3%',
-                                        right: criticality.label === 'undefined' ? '9%' : '16%'
-                                    }
-                                }
-                            >
-                                <b>{criticality.label}</b>
-                            </label> */}
-                        </div>
-                    </div>
                     <div className="col-sm-12 text-center pt-2">
                         <label>
                             VECTOR:
@@ -307,12 +215,7 @@ const Index = () => {
                             </a>
                         </label>
                     </div>
-                    {/* <div className="col-sm-12 text-center">
-                        <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop" >
-                            How is Severity Risk Calculated?
-                        </a>
-                    </div> */}
-                    <Modal />
+                    <Modal data={data}/>
                 </div>
             </div>
         </>
