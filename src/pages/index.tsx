@@ -250,11 +250,11 @@ const Index = () => {
                             <h3>RISK SEVERITY</h3>
                             <label className="text-uppercase px-4 py-1"
                                 style={
-                                    { 
-                                        backgroundColor: criticality.color, 
-                                        position: 'absolute', 
-                                        top: '3%', 
-                                        right: criticality.label === 'undefined'? '9%' : '16%' 
+                                    {
+                                        backgroundColor: criticality.color,
+                                        position: 'absolute',
+                                        top: '3%',
+                                        right: criticality.label === 'undefined'? '9%' : '16%'
                                     }
                                 }
                             >
