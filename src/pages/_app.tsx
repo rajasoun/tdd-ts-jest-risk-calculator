@@ -1,5 +1,4 @@
 import type { AppProps } from 'next/app'
-import Head from 'next/head'
 import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -10,7 +9,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         />
         <Script
-          strategy="lazyOnload"
           src="https://code.jquery.com/jquery-3.6.0.min.js"
         />
         <Script
