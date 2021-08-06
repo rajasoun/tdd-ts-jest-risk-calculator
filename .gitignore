@@ -201,3 +201,5 @@ node_modules
 package-lock.json
 *.js
 yarn.lock
+
+!next.config.js
