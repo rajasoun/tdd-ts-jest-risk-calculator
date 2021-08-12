@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import data from '../data/risk-calculator.json';
 import Risk, { ThreatVector } from '../risk';
-import Modal from '../component/risk-calculation-modal'
+import LCC from 'lightning-container';
+import Modal from '../component/risk-calculation-modal';
 
 interface Option {
     name: string,
@@ -41,6 +42,7 @@ const styleLabelAllignment = {
 
 let initialVector = data.initialVector
 let vectorToString = Risk.vectorToString(initialVector);
+let optionsState: any;
 
 export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => {
     const vector = initialVector.map(
@@ -76,17 +78,17 @@ const Index = () => {
     const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
     const [impact, setImpact] = useState({ avg: '', label: '', color: '' });
     const [criticality, setCriticality] = useState({ label: '', color: '' });
+    const CalculateRisk = (riskCalculatorLabel: string, riskData: any) => {
 
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let json = {
-            id: Number(event.target.id),
-            name: event.target.name,
-            value: Number(event.target.value)
-        }
-        // Generate Threat Vecor
-        const risk = generateThreatVectorJSON(json);
-        // Set vector to String
+        const risk = riskCalculatorLabel === 'vectorToString' ? riskData : Risk.stringToVector(riskData);
+
         vectorToString = Risk.vectorToString(risk)
+
+        if (riskCalculatorLabel === 'stringToVector') {
+            initialVector = risk;
+            optionsState = risk;
+        }
+
 
         // Likelihood
         const lhAvg = Risk.calculateAverage(risk.slice(0, 8));
@@ -105,6 +107,33 @@ const Index = () => {
         const criticalityColor = Risk.colour(criticalityLabel);
         setCriticality({ label: criticalityLabel, color: criticalityColor });
     }
+
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        let json = {
+            id: Number(event.target.id),
+            name: event.target.name,
+            value: Number(event.target.value)
+        }
+        // Generate Threat Vecor
+        const risk = generateThreatVectorJSON(json);
+        // Set vector to String
+        vectorToString = Risk.vectorToString(risk)
+        CalculateRisk("vectorToString", risk)
+    }
+
+    useEffect(() => {
+        // LCC.addMessageHandler(function (message) {
+        //     console.log(message);
+        //     if (message.value === "save") {
+        //         LCC.sendMessage(vectorToString);
+        //     } else {
+        //         CalculateRisk("stringToVector", message.vectr)
+        //     }
+        // });
+        CalculateRisk("stringToVector", '(SL:5/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:7/RD:0/NC:0/PV:0)')
+    }, [])
+
 
     return (
         <div>
@@ -163,7 +192,8 @@ const Index = () => {
                                         {ele.title}
                                     </div>
                                     {
-                                        !ele.label ? ele.select.map((data: Select) => (
+
+                                        !ele.label ? ele.select.map((data: Select, ind: number) => (
                                             <div key={data.id}>
                                                 <div className="form">
                                                     <div>
@@ -180,6 +210,7 @@ const Index = () => {
                                                             className="form-control"
                                                             style={styleSelect}
                                                             onChange={handleChange}
+                                                            defaultValue={5}
                                                         >
                                                             {data.options.map(
                                                                 (option: Option, i: number) => (
