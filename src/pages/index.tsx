@@ -25,16 +25,18 @@ const styleTitle = {
 
 const styleSelectLabel = {
     margin: '0rem 1rem',
-    minWidth: 400,
     width: '100%'
 }
 
 const styleSelect = {
     margin: '0.75rem 1rem',
-    minWidth: 400,
     width: '100%'
 }
 
+const styleLabelAllignment = {
+    position: 'relative',
+    top: '50%'
+}
 // Styles for element ends
 
 let initialVector = data.initialVector
@@ -51,7 +53,7 @@ export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => 
 const LabelLayout = (props: any) => {
     const data = props.data
     return (
-        <div className="text-center" style={{ margin: '10.6rem 0 0 0' }}>
+        <div className="text-center">
             <h3 className="text-uppercase">{props.title}</h3>
             {
                 data.avg && (
@@ -105,33 +107,32 @@ const Index = () => {
     }
 
     return (
-        <>
+        <div>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-8">
                         <h1
                             data-testid="header"
-                            className="container text-center my-3"
+                            className="container text-center mt-2 mb-0"
                         >
                             Risk Assessment Calculator
                         </h1>
                     </div>
-                    <div className="col-sm-3 offset-sm-1" style={{ position: 'relative', top: '2rem' }}>
-                        <h3 className="mx-4">RISK SEVERITY</h3>
+                    <div className="col-sm-4 mt-2">
+                        <h3 className="container text-center mt-3 mb-0">RISK SEVERITY</h3>
                     </div>
                 </div>
-
-                <hr style={{ marginTop: '0rem' }} />
+                <hr />
             </div>
-            <div className="container">
-                <div className="">
-                    <div className="col-sm-4 offset-sm-11">
-                        <div style={{ paddingLeft: '2rem', marginTop: '-0.5rem' }}>
-                            <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop" style={{ zIndex: 1, position: 'relative' }}>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-4 offset-md-8 text-center" style={{ marginTop: '-0.5rem' }}>
+                        <div className="my-0">
+                            <a href="#staticBackdrop" data-toggle="modal" data-target="#staticBackdrop">
                                 How is Severity Risk Calculated?
                             </a>
                         </div>
-                        <div style={{ paddingLeft: criticality.label === 'undefined' ? '3.8rem' : '5rem' }}>
+                        <div>
                             <label className="text-uppercase px-4 py-1 mx-3 my-2"
                                 style={
                                     {
@@ -145,7 +146,7 @@ const Index = () => {
                     </div>
                 </div>
             </div>
-            <div className="container-fluid px-5" style={{ marginTop: '-3rem' }}>
+            <div className="container-fluid">
                 <div className="row">
                     {
                         data.data.map((ele: any, index: number) => (
@@ -155,7 +156,8 @@ const Index = () => {
                             >
                                 <div
                                     key={`RAC_${index}`}
-                                    className="col-sm-12"
+                                    className={(ele.label === "Likelihood" || ele.label === "Impact") ? "position-relative" : ""}
+                                    style={{ top: '50%' }}
                                 >
                                     <div style={styleTitle}>
                                         {ele.title}
@@ -163,9 +165,12 @@ const Index = () => {
                                     {
                                         !ele.label ? ele.select.map((data: Select) => (
                                             <div key={data.id}>
-                                                <form>
-                                                    <div className="form-group">
-                                                        <label style={styleSelectLabel}>
+                                                <div className="form">
+                                                    <div>
+                                                        <label
+                                                            style={styleSelectLabel}
+                                                            className="checkbox-inline"
+                                                        >
                                                             {data.description}
                                                         </label>
                                                         <select
@@ -187,7 +192,7 @@ const Index = () => {
                                                                 ))}
                                                         </select>
                                                     </div>
-                                                </form>
+                                                </div>
                                             </div>
                                         )) : ele.label === 'Likelihood' ?
                                             <LabelLayout
@@ -205,20 +210,20 @@ const Index = () => {
                     }
                 </div>
             </div>
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row">
-                    <div className="col-sm-12 text-center pt-2">
+                    <div className="col-sm-12 text-center pt-0">
                         <label>
                             VECTOR:
-                            <a href="#" target="_blank" data-testid="anchorTag">
+                            <a href="#" target="_blank" data-testid="anchorTag" className="col">
                                 {vectorToString}
                             </a>
                         </label>
                     </div>
-                    <Modal data={data}/>
+                    <Modal data={data} />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
