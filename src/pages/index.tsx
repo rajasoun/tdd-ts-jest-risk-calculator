@@ -80,14 +80,15 @@ const Index = () => {
     const [criticality, setCriticality] = useState({ label: '', color: '' });
     const CalculateRisk = (riskCalculatorLabel: string, riskData: any) => {
 
-        const risk = riskCalculatorLabel === 'vectorToString' ? riskData : Risk.stringToVector(riskData);
+        // const risk = riskCalculatorLabel === 'vectorToString' ? riskData : Risk.stringToVector(riskData);
+        const risk = riskData;
 
-        vectorToString = Risk.vectorToString(risk)
+        // vectorToString = Risk.vectorToString(risk)
 
-        if (riskCalculatorLabel === 'stringToVector') {
-            initialVector = risk;
-            optionsState = risk;
-        }
+        // if (riskCalculatorLabel === 'stringToVector') {
+        //     initialVector = risk;
+        //     optionsState = risk;
+        // }
 
 
         // Likelihood
@@ -131,7 +132,7 @@ const Index = () => {
         //         CalculateRisk("stringToVector", message.vectr)
         //     }
         // });
-        CalculateRisk("stringToVector", '(SL:5/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:7/RD:0/NC:0/PV:0)')
+        // CalculateRisk("stringToVector", '(SL:5/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:7/RD:0/NC:0/PV:0)')
     }, [])
 
 
@@ -210,7 +211,6 @@ const Index = () => {
                                                             className="form-control"
                                                             style={styleSelect}
                                                             onChange={handleChange}
-                                                            defaultValue={5}
                                                         >
                                                             {data.options.map(
                                                                 (option: Option, i: number) => (
