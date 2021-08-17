@@ -13,7 +13,7 @@ interface Select {
     description: string,
     name: string,
     id: number,
-    options: Array<Option>
+    options: Array<Option>,
 }
 
 // Styles for element begins
@@ -34,15 +34,12 @@ const styleSelect = {
     width: '100%'
 }
 
-const styleLabelAllignment = {
-    position: 'relative',
-    top: '50%'
-}
 // Styles for element ends
 
 let initialVector = data.initialVector
 let vectorToString = Risk.vectorToString(initialVector);
-let optionsState: any;
+let risk: any;
+const optionsState: any = [] ;
 
 export const generateThreatVectorJSON = (json: ThreatVector): ThreatVector[] => {
     const vector = initialVector.map(
@@ -73,23 +70,30 @@ const LabelLayout = (props: any) => {
     )
 }
 
-const Index = () => {
-
+const Index = (props: any) => {
     const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
     const [impact, setImpact] = useState({ avg: '', label: '', color: '' });
     const [criticality, setCriticality] = useState({ label: '', color: '' });
+    const [defaultOptions, setDefaultOptions]: any = useState({
+        "SL": "", "M": "", "O": "", "S": "", "ED": "", "EE": "", "A": "", "ID": "", "LC": "", "LI": "", "LAC": "", "LAV": "", "FD": "", "RD": "", "NC": "", "PV": ""
+    })
+
     const CalculateRisk = (riskCalculatorLabel: string, riskData: any) => {
+        /* istanbul ignore else */
+        if (riskCalculatorLabel === 'vectorToString') {
+            vectorToString = Risk.vectorToString(riskData)
+        } else {
+            risk = Risk.stringToVector(riskData)
+            initialVector = risk;
+            vectorToString = Risk.vectorToString(risk);
+        }
 
-        // const risk = riskCalculatorLabel === 'vectorToString' ? riskData : Risk.stringToVector(riskData);
-        const risk = riskData;
-
-        // vectorToString = Risk.vectorToString(risk)
-
-        // if (riskCalculatorLabel === 'stringToVector') {
-        //     initialVector = risk;
-        //     optionsState = risk;
-        // }
-
+        optionsState.push(risk.slice(0, 4));
+        optionsState.push(risk.slice(4, 8));
+        optionsState.push("");
+        optionsState.push(risk.slice(8, 12));
+        optionsState.push(risk.slice(12, 16));
+        optionsState.push("");
 
         // Likelihood
         const lhAvg = Risk.calculateAverage(risk.slice(0, 8));
@@ -111,28 +115,34 @@ const Index = () => {
 
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = event.target
+        setDefaultOptions({
+            ...defaultOptions,
+            [name]: value
+        })
+
         let json = {
             id: Number(event.target.id),
             name: event.target.name,
             value: Number(event.target.value)
         }
         // Generate Threat Vecor
-        const risk = generateThreatVectorJSON(json);
-        // Set vector to String
-        vectorToString = Risk.vectorToString(risk)
+        risk = generateThreatVectorJSON(json);
+
         CalculateRisk("vectorToString", risk)
     }
 
     useEffect(() => {
-        // LCC.addMessageHandler(function (message) {
-        //     console.log(message);
-        //     if (message.value === "save") {
-        //         LCC.sendMessage(vectorToString);
-        //     } else {
-        //         CalculateRisk("stringToVector", message.vectr)
-        //     }
-        // });
-        // CalculateRisk("stringToVector", '(SL:5/M:0/O:0/S:0/ED:0/EE:0/A:0/ID:0/LC:0/LI:0/LAV:0/LAC:0/FD:7/RD:0/NC:0/PV:0)')
+        /* istanbul ignore next */
+        LCC.addMessageHandler(function (message) {
+            console.log(message);
+            if (message.value === "save") {
+                LCC.sendMessage(vectorToString);
+            } else {
+                console.log("message.value !== save", message.value);
+                CalculateRisk("stringToVector", message.value)
+            }
+        });
     }, [])
 
 
@@ -193,7 +203,6 @@ const Index = () => {
                                         {ele.title}
                                     </div>
                                     {
-
                                         !ele.label ? ele.select.map((data: Select, ind: number) => (
                                             <div key={data.id}>
                                                 <div className="form">
@@ -211,16 +220,21 @@ const Index = () => {
                                                             className="form-control"
                                                             style={styleSelect}
                                                             onChange={handleChange}
+                                                            value={(risk != undefined && optionsState[index] != undefined && data.name === optionsState[index][ind].name && defaultOptions[data.name] == '') ? optionsState[index][ind].value : defaultOptions[data.name]}
+                                                        // defaultValue={defaultOptions}
                                                         >
-                                                            {data.options.map(
-                                                                (option: Option, i: number) => (
-                                                                    <option
-                                                                        key={`${data.name}__${i}`}
-                                                                        value={option.value}
-                                                                    >
-                                                                        {option.name} ({option.value})
-                                                                    </option>
-                                                                ))}
+
+                                                            {
+                                                                data.options.map(
+                                                                    (option: Option, i: number) => (
+                                                                        <option
+                                                                            key={`${data.name}__${i}`}
+                                                                            value={option.value}
+                                                                        >
+                                                                            {option.name} ({option.value})
+                                                                        </option>
+                                                                    ))
+                                                            }
                                                         </select>
                                                     </div>
                                                 </div>
