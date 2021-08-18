@@ -70,7 +70,7 @@ const LabelLayout = (props: any) => {
     )
 }
 
-const Index = (props: any) => {
+const Index = () => {
     const [likelihood, setLikelihood] = useState({ avg: '', label: '', color: '' });
     const [impact, setImpact] = useState({ avg: '', label: '', color: '' });
     const [criticality, setCriticality] = useState({ label: '', color: '' });
