@@ -1,4 +1,6 @@
 {
+  "name" : "risk-calculator",
+  "version" : "0.0.1",
   "scripts": {
     "lint-staged": "npm --prefix ./shift-left lint-staged",
     "lint-fix": "npm --prefix ./shift-left run lint-fix",
@@ -6,7 +8,7 @@
     "build": "next build",
     "test": "jest",
     "repl": "npx ts-node",
-    "export": "next build && next export && mv out public && zip-build public/out public/rick-calculator-zip-file/",
+    "export": "rm -rf public/* && next build && next export && cp -r out/* public && rm -rf out && zip-build public public",
     "dev": "next dev",
     "start": "next start",
     "postinstall": "shift-left/bin/post-install.sh"

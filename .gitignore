@@ -203,3 +203,5 @@ package-lock.json
 yarn.lock
 
 !next.config.js
+
+public/*
